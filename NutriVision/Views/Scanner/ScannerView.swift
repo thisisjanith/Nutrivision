@@ -107,7 +107,7 @@ struct ScannerView: View {
 
     private func boundingBoxOverlay(detection: DetectedFood) -> some View {
         VStack(spacing: Theme.Spacing.sm) {
-            Text("\(detection.displayName) — \(detection.confidencePercent)%")
+            Text(detection.isBarcodeScan ? detection.displayName : "\(detection.displayName) — \(detection.confidencePercent)%")
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundStyle(.white)
@@ -121,9 +121,15 @@ struct ScannerView: View {
         }
     }
 
+    private var barcodeStatusText: String? {
+        if viewModel.isLookingUpBarcode { return "Looking up product…" }
+        return viewModel.barcodeMessage
+    }
+
     private var scanningHint: some View {
-        Text("Point your camera at food")
+        Text(barcodeStatusText ?? "Point your camera at food or a barcode")
             .font(.footnote)
+            .multilineTextAlignment(.center)
             .foregroundStyle(.white.opacity(0.8))
             .padding(.horizontal, Theme.Spacing.md)
             .padding(.vertical, Theme.Spacing.sm)
@@ -139,7 +145,7 @@ struct ScannerView: View {
                 .padding(.top, Theme.Spacing.sm)
 
             VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
-                Text("DETECTED")
+                Text(detection.isBarcodeScan ? "PRODUCT" : "DETECTED")
                     .font(.caption2)
                     .fontWeight(.semibold)
                     .foregroundStyle(.white.opacity(0.6))
@@ -165,7 +171,7 @@ struct ScannerView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            if !detection.alternatives.isEmpty {
+            if !detection.alternatives.isEmpty && !detection.isBarcodeScan {
                 alternativesRow(detection: detection)
             }
 

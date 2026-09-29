@@ -39,6 +39,24 @@ struct DetectedFood: Identifiable, Equatable {
     var hasNutrition: Bool { candidate.hasNutrition }
     var isLowConfidence: Bool { candidate.confidence < lowConfidenceThreshold }
 
+    static let barcodeLabelPrefix = "barcode:"
+
+    /// True for a packaged-product reading from a barcode rather than a
+    /// classifier guess. Barcode matches are exact, so the UI skips the
+    /// confidence percentage and the "not quite right?" alternatives.
+    var isBarcodeScan: Bool { rawLabel.hasPrefix(Self.barcodeLabelPrefix) }
+
+    static func barcode(_ code: String, nutrition: NutritionProfile) -> DetectedFood {
+        DetectedFood(
+            candidate: FoodCandidate(
+                rawLabel: barcodeLabelPrefix + code,
+                confidence: 1.0,
+                nutrition: nutrition
+            ),
+            alternatives: []
+        )
+    }
+
     /// Promotes one of the runners-up to the primary reading, keeping the
     /// rest (and the displaced primary) available as alternatives.
     func selecting(_ replacement: FoodCandidate) -> DetectedFood {
@@ -64,6 +82,9 @@ final class ScannerViewModel {
     var isClassifying = false
     var cameraAuthorized = false
     var cameraErrorMessage: String?
+    var isLookingUpBarcode = false
+    /// Transient feedback for a barcode that was read but couldn't be priced.
+    var barcodeMessage: String?
 
     private let videoOutput = AVCaptureVideoDataOutput()
     private let classifier = ClassifierService()
@@ -71,6 +92,17 @@ final class ScannerViewModel {
     private var frameSampler: FrameSampler?
     private var stabilizer = DetectionStabilizer()
     private var isSessionConfigured = false
+    private let productLookup: any ProductLookup
+    private var barcodeScanner: BarcodeScanner?
+    private var lastBarcodeAttempt: (code: String, date: Date)?
+
+    /// The scanner sees the same barcode every frame while it's in view; a
+    /// repeat inside this window is ignored so we don't hammer the network.
+    private let barcodeRetryInterval: TimeInterval = 5
+
+    init(productLookup: any ProductLookup = OpenFoodFactsClient()) {
+        self.productLookup = productLookup
+    }
 
     /// Floor on the gap between inferences. The sampler also refuses to
     /// dispatch while one is in flight, so on a slower device the real rate
@@ -142,6 +174,7 @@ final class ScannerViewModel {
 
     private func clearDetection() {
         detection = nil
+        barcodeMessage = nil
         stabilizer.reset()
         frameSampler?.reset()
     }
@@ -166,6 +199,11 @@ final class ScannerViewModel {
         }
         frameSampler = sampler
 
+        let barcodeScanner = BarcodeScanner { [weak self] code in
+            Task { @MainActor in await self?.handleBarcode(code) }
+        }
+        self.barcodeScanner = barcodeScanner
+
         let session = self.session
         let videoOutput = self.videoOutput
 
@@ -188,12 +226,45 @@ final class ScannerViewModel {
             // so the request handler needs no orientation correction.
             videoOutput.connection(with: .video)?.videoRotationAngle = 90
 
+            if session.canAddOutput(barcodeScanner.output) {
+                session.addOutput(barcodeScanner.output)
+                barcodeScanner.configureTypes()
+            }
+
             session.commitConfiguration()
+        }
+    }
+
+    /// Resolves a scanned barcode to nutrition via the product database.
+    func handleBarcode(_ code: String) async {
+        guard inputMode == .liveCamera, !isLookingUpBarcode else { return }
+        // An exact barcode reading is authoritative; don't re-look-up what's
+        // already on screen.
+        if detection?.rawLabel == DetectedFood.barcodeLabelPrefix + code { return }
+        if let last = lastBarcodeAttempt, last.code == code,
+           Date().timeIntervalSince(last.date) < barcodeRetryInterval { return }
+        lastBarcodeAttempt = (code, Date())
+
+        isLookingUpBarcode = true
+        barcodeMessage = nil
+        defer { isLookingUpBarcode = false }
+
+        do {
+            if let profile = try await productLookup.product(barcode: code) {
+                stabilizer.reset()
+                detection = .barcode(code, nutrition: profile)
+            } else {
+                barcodeMessage = "Barcode \(code) isn't in the product database. Try scanning the food itself."
+            }
+        } catch {
+            barcodeMessage = "Couldn't reach the product database. Check your connection."
         }
     }
 
     private func handleFrame(_ frame: SendablePixelBuffer) async {
         guard inputMode == .liveCamera else { return }
+        // A barcode match is exact; live classifier frames must not replace it.
+        guard detection?.isBarcodeScan != true else { return }
 
         isClassifying = true
         defer { isClassifying = false }
