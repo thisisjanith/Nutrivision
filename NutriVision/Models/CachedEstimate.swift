@@ -6,6 +6,7 @@
 import Foundation
 import SwiftData
 import Vision
+import CoreML
 import UIKit
 
 /// A previously returned cloud estimate keyed by an embedding of the image it
@@ -37,7 +38,9 @@ nonisolated enum ImageEmbedder {
         let request = VNGenerateImageFeaturePrintRequest()
         #if targetEnvironment(simulator)
         // The simulator has no Neural Engine/GPU path for this request.
-        request.usesCPUOnly = true
+        if let cpu = MLComputeDevice.allComputeDevices.first(where: { if case .cpu = $0 { true } else { false } }) {
+            request.setComputeDevice(cpu, for: .main)
+        }
         #endif
         try VNImageRequestHandler(cgImage: cgImage, orientation: CGImagePropertyOrientation(image.imageOrientation), options: [:])
             .perform([request])

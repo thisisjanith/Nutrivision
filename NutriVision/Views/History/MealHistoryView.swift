@@ -7,12 +7,73 @@ import SwiftUI
 import SwiftData
 import Charts
 
-struct MealHistoryView: View {
-    enum RangeOption: String, CaseIterable, Identifiable {
-        case week = "Week"
-        case month = "Month"
-        var id: String { rawValue }
+enum HistoryRange: String, CaseIterable, Identifiable {
+    case week = "Week"
+    case month = "Month"
+    var id: String { rawValue }
+
+    func start(now: Date = Date(), calendar: Calendar = .current) -> Date {
+        let startOfToday = calendar.startOfDay(for: now)
+        switch self {
+        case .week: return calendar.date(byAdding: .day, value: -6, to: startOfToday) ?? startOfToday
+        case .month: return calendar.date(byAdding: .month, value: -1, to: startOfToday) ?? startOfToday
+        }
     }
+}
+
+/// Pure filtering/grouping so the history rules can be unit-tested.
+enum MealHistoryFilter {
+    static func meals(_ meals: [MealEntry], range: HistoryRange, search: String = "", now: Date = Date(), calendar: Calendar = .current) -> [MealEntry] {
+        let start = range.start(now: now, calendar: calendar)
+        let text = search.trimmingCharacters(in: .whitespaces)
+        return meals.filter { meal in
+            meal.timestamp >= start && (text.isEmpty || meal.name.localizedCaseInsensitiveContains(text))
+        }
+    }
+
+    static func groupByDate(_ meals: [MealEntry], now: Date = Date(), calendar: Calendar = .current) -> [(title: String, meals: [MealEntry])] {
+        let groups = Dictionary(grouping: meals) { calendar.startOfDay(for: $0.timestamp) }
+        return groups.keys.sorted(by: >).map { day in
+            let title: String
+            if calendar.isDate(day, inSameDayAs: now) {
+                title = "TODAY"
+            } else if let yesterday = calendar.date(byAdding: .day, value: -1, to: calendar.startOfDay(for: now)), calendar.isDate(day, inSameDayAs: yesterday) {
+                title = "YESTERDAY"
+            } else {
+                title = day.formatted(.dateTime.month(.abbreviated).day()).uppercased()
+            }
+            return (title, (groups[day] ?? []).sorted { $0.timestamp > $1.timestamp })
+        }
+    }
+}
+
+/// Values needed to put a just-deleted meal back.
+private struct DeletedMeal {
+    let id: UUID, name: String, timestamp: Date, calories, protein, carbs, fat: Double
+    let confidence: Double, serving: String, mealType: MealType
+    let fiber, sugar, sodium, satFat: Double
+    let photo: Data?
+
+    init(_ m: MealEntry) {
+        id = m.id; name = m.name; timestamp = m.timestamp; calories = m.calories; protein = m.proteinGrams
+        carbs = m.carbsGrams; fat = m.fatGrams; confidence = m.confidenceScore; serving = m.servingSize
+        mealType = m.mealType; fiber = m.fiberGrams; sugar = m.sugarGrams; sodium = m.sodiumMg
+        satFat = m.saturatedFatGrams; photo = m.photoData
+    }
+
+    func restore() -> MealEntry {
+        let entry = MealEntry(name: name, calories: calories, protein: protein, carbs: carbs, fat: fat, confidence: confidence,
+                              servingSize: serving, mealType: mealType, timestamp: timestamp, fiber: fiber, sugar: sugar,
+                              sodiumMg: sodium, saturatedFat: satFat, photoData: photo)
+        entry.id = id
+        return entry
+    }
+}
+
+struct MealHistoryView: View {
+    typealias RangeOption = HistoryRange
+
+    var onEdit: (MealEntry) -> Void = { _ in }
 
     private struct MacroSlice: Identifiable {
         let id = UUID()
@@ -24,20 +85,11 @@ struct MealHistoryView: View {
     @Query(sort: \MealEntry.timestamp, order: .reverse) private var allMeals: [MealEntry]
     @Environment(\.modelContext) private var modelContext
     @State private var range: RangeOption = .week
-
-    private var rangeStart: Date {
-        let calendar = Calendar.current
-        let startOfToday = calendar.startOfDay(for: Date())
-        switch range {
-        case .week:
-            return calendar.date(byAdding: .day, value: -6, to: startOfToday) ?? startOfToday
-        case .month:
-            return calendar.date(byAdding: .month, value: -1, to: startOfToday) ?? startOfToday
-        }
-    }
+    @State private var searchText = ""
+    @State private var lastDeleted: DeletedMeal?
 
     private var filteredMeals: [MealEntry] {
-        allMeals.filter { $0.timestamp >= rangeStart }
+        MealHistoryFilter.meals(allMeals, range: range, search: searchText)
     }
 
     private var totals: DashboardViewModel.MacroTotals {
@@ -67,7 +119,7 @@ struct MealHistoryView: View {
     }
 
     private var sections: [(title: String, meals: [MealEntry])] {
-        groupByDate(filteredMeals)
+        MealHistoryFilter.groupByDate(filteredMeals)
     }
 
     var body: some View {
@@ -94,7 +146,7 @@ struct MealHistoryView: View {
                 ForEach(sections, id: \.title) { section in
                     Section {
                         ForEach(section.meals) { meal in
-                            MealRow(meal: meal)
+                            MealRow(meal: meal, onEdit: { onEdit(meal) })
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                     Button(role: .destructive) {
                                         delete(meal)
@@ -110,13 +162,31 @@ struct MealHistoryView: View {
             }
             .listStyle(.insetGrouped)
             .navigationTitle("History")
+            .searchable(text: $searchText, prompt: "Search meals")
             .overlay {
                 if filteredMeals.isEmpty {
-                    ContentUnavailableView(
-                        "No Meals Logged",
-                        systemImage: "clock",
-                        description: Text("Meals you scan and save will show up here.")
-                    )
+                    if searchText.isEmpty {
+                        ContentUnavailableView(
+                            "No Meals Logged",
+                            systemImage: "clock",
+                            description: Text("Meals you scan and save will show up here.")
+                        )
+                    } else {
+                        ContentUnavailableView.search(text: searchText)
+                    }
+                }
+            }
+            .overlay(alignment: .bottom) {
+                if lastDeleted != nil {
+                    HStack {
+                        Text("Meal deleted")
+                        Spacer()
+                        Button("Undo", action: undoDelete).fontWeight(.semibold)
+                    }
+                    .padding(Theme.Spacing.md)
+                    .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.control))
+                    .padding(Theme.Spacing.md)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
         }
@@ -138,6 +208,9 @@ struct MealHistoryView: View {
             }
             .chartLegend(.hidden)
             .frame(width: 120, height: 120)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Macro split for the \(range.rawValue.lowercased())")
+            .accessibilityValue("Protein \(macroPercentages.protein) percent, carbs \(macroPercentages.carbs) percent, fat \(macroPercentages.fat) percent")
             .overlay {
                 VStack(spacing: 2) {
                     Text(range.rawValue)
@@ -178,31 +251,30 @@ struct MealHistoryView: View {
         }
     }
 
-    private func groupByDate(_ meals: [MealEntry]) -> [(title: String, meals: [MealEntry])] {
-        let calendar = Calendar.current
-        let groups = Dictionary(grouping: meals) { calendar.startOfDay(for: $0.timestamp) }
-        return groups.keys.sorted(by: >).map { day in
-            let title: String
-            if calendar.isDateInToday(day) {
-                title = "TODAY"
-            } else if calendar.isDateInYesterday(day) {
-                title = "YESTERDAY"
-            } else {
-                title = day.formatted(.dateTime.month(.abbreviated).day()).uppercased()
-            }
-            let mealsForDay = (groups[day] ?? []).sorted { $0.timestamp > $1.timestamp }
-            return (title, mealsForDay)
+    private func delete(_ meal: MealEntry) {
+        lastDeleted = DeletedMeal(meal)
+        withAnimation {
+            modelContext.delete(meal)
+            Tracker.shared.mealDeleted(context: modelContext)
+        }
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        let deletedID = meal.id
+        Task {
+            try? await Task.sleep(for: .seconds(6))
+            if lastDeleted?.id == deletedID { withAnimation { lastDeleted = nil } }
         }
     }
 
-    private func delete(_ meal: MealEntry) {
-        withAnimation {
-            modelContext.delete(meal)
-        }
+    private func undoDelete() {
+        guard let deleted = lastDeleted else { return }
+        let entry = deleted.restore()
+        modelContext.insert(entry)
+        Tracker.shared.mealSaved(entry, context: modelContext)
+        withAnimation { lastDeleted = nil }
     }
 }
 
 #Preview {
     MealHistoryView()
-        .modelContainer(for: MealEntry.self, inMemory: true)
+        .modelContainer(for: [MealEntry.self, SavedFood.self], inMemory: true)
 }

@@ -132,7 +132,11 @@ extension NutritionProfile {
             proteinGrams: proteinGrams * factor,
             carbsGrams: carbsGrams * factor,
             fatGrams: fatGrams * factor,
-            servingSize: "\(servingSize) ×\(text)"
+            servingSize: "\(servingSize) ×\(text)",
+            fiberGrams: fiberGrams * factor,
+            sugarGrams: sugarGrams * factor,
+            sodiumMg: sodiumMg * factor,
+            saturatedFatGrams: saturatedFatGrams * factor
         )
     }
 }

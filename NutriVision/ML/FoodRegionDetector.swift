@@ -51,10 +51,10 @@ protocol FoodRegionDetector: Sendable {
 /// Drop the compiled model into the app target as `FoodDetector.mlpackage`
 /// (see `Proxy/README.md`); until then `makeDefault()` uses the saliency
 /// detector below.
-actor CoreMLFoodRegionDetector: FoodRegionDetector {
+nonisolated final class CoreMLFoodRegionDetector: FoodRegionDetector, @unchecked Sendable {
     private let request: VNCoreMLRequest
 
-    nonisolated init?(modelURL: URL) {
+    init?(modelURL: URL) {
         guard let model = try? MLModel(contentsOf: modelURL, configuration: { let c = MLModelConfiguration(); c.computeUnits = .all; return c }()),
               let vision = try? VNCoreMLModel(for: model) else { return nil }
         let request = VNCoreMLRequest(model: vision)
@@ -62,6 +62,8 @@ actor CoreMLFoodRegionDetector: FoodRegionDetector {
         self.request = request
     }
 
+    /// Callers run one detection at a time (the frame sampler applies
+    /// backpressure), so the shared request is never used concurrently.
     func detect(in frame: SendablePixelBuffer) async -> FoodRegion? {
         try? VNImageRequestHandler(cvPixelBuffer: frame.buffer, options: [:]).perform([request])
         let objects = (request.results as? [VNRecognizedObjectObservation]) ?? []
@@ -74,7 +76,7 @@ actor CoreMLFoodRegionDetector: FoodRegionDetector {
 /// Fallback when no trained detector is bundled: objectness saliency picks the
 /// most prominent object, which on a plated meal is almost always the food.
 /// Less precise than a trained detector and it can't tell food from a mug.
-actor SaliencyFoodRegionDetector: FoodRegionDetector {
+nonisolated final class SaliencyFoodRegionDetector: FoodRegionDetector, @unchecked Sendable {
     private let request = VNGenerateObjectnessBasedSaliencyImageRequest()
 
     func detect(in frame: SendablePixelBuffer) async -> FoodRegion? {
@@ -87,7 +89,7 @@ actor SaliencyFoodRegionDetector: FoodRegionDetector {
     }
 }
 
-enum FoodRegionDetectorFactory {
+nonisolated enum FoodRegionDetectorFactory {
     static func makeDefault() -> any FoodRegionDetector {
         if let url = Bundle.main.url(forResource: "FoodDetector", withExtension: "mlmodelc"),
            let detector = CoreMLFoodRegionDetector(modelURL: url) {

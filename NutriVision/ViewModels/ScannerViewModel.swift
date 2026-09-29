@@ -7,6 +7,7 @@
 import UIKit
 import Observation
 import SwiftData
+import os
 
 /// One ranked guess from the classifier, with nutrition attached if we can
 /// map it.
@@ -36,6 +37,8 @@ struct DetectedFood: Identifiable, Equatable {
     /// Set when the reading came from the cloud model (or its local cache).
     var estimate: CloudFoodEstimate?
     var fromCache = false
+    /// Thumbnail of the frame this reading came from.
+    var imageData: Data?
 
     var rawLabel: String { candidate.rawLabel }
     var confidence: Float { candidate.confidence }
@@ -140,7 +143,10 @@ final class ScannerViewModel {
     var hasCapturableFrame: Bool { latestFrame != nil }
 
     private let videoOutput = AVCaptureVideoDataOutput()
-    private let classifier = ClassifierService()
+    private let classifier: any FoodClassifying
+    private let nutritionSource: any NutritionSource
+    private(set) var torchOn = false
+    var hasTorch: Bool { AVCaptureDevice.default(for: .video)?.hasTorch ?? false }
     private let sessionQueue = DispatchQueue(label: "com.nutrivision.scanner.session")
     private var frameSampler: FrameSampler?
     private var stabilizer = DetectionStabilizer()
@@ -164,8 +170,12 @@ final class ScannerViewModel {
     init(
         productLookup: any ProductLookup = FallbackProductLookup(sources: [OpenFoodFactsClient(), USDAClient()]),
         regionDetector: any FoodRegionDetector = FoodRegionDetectorFactory.makeDefault(),
-        visionClient: (any VisionLLMClient)? = ProxyVisionClient.makeDefault()
+        visionClient: (any VisionLLMClient)? = ProxyVisionClient.makeDefault(),
+        classifier: any FoodClassifying = ClassifierService(),
+        nutritionSource: any NutritionSource = LocalNutritionSource()
     ) {
+        self.classifier = classifier
+        self.nutritionSource = nutritionSource
         self.productLookup = productLookup
         self.regionDetector = regionDetector
         self.visionClient = visionClient
@@ -200,6 +210,7 @@ final class ScannerViewModel {
     }
 
     func stop() {
+        if torchOn { toggleTorch() }
         frameSampler?.reset()
         let session = self.session
         sessionQueue.async {
@@ -218,6 +229,18 @@ final class ScannerViewModel {
             Task { await start() }
         case .photoPicker:
             stop()
+        }
+    }
+
+    func toggleTorch() {
+        guard let device = AVCaptureDevice.default(for: .video), device.hasTorch else { return }
+        do {
+            try device.lockForConfiguration()
+            defer { device.unlockForConfiguration() }
+            device.torchMode = torchOn ? .off : .on
+            torchOn.toggle()
+        } catch {
+            Log.scanner.error("Torch toggle failed: \(error.localizedDescription)")
         }
     }
 
@@ -256,6 +279,7 @@ final class ScannerViewModel {
             statusMessage = nil
             region = nil
             detection = .label(profile)
+            detection?.imageData = FrameCapture.jpeg(from: image, maxDimension: 320, quality: 0.6)
         } else {
             statusMessage = "Couldn't read a nutrition label. Hold the panel flat and fill the frame."
         }
@@ -268,10 +292,12 @@ final class ScannerViewModel {
         isAnalyzing = true
         statusMessage = nil
         defer { isAnalyzing = false }
+        let thumbnail = FrameCapture.jpeg(from: image, maxDimension: 320, quality: 0.6)
 
         if let cached = cache?.lookup(image: image) {
             region = nil
             detection = .cloud(cached, fromCache: true)
+            detection?.imageData = thumbnail
             return
         }
 
@@ -281,6 +307,7 @@ final class ScannerViewModel {
                 cache?.store(estimate, image: image)
                 region = nil
                 detection = .cloud(estimate, fromCache: false)
+                detection?.imageData = thumbnail
                 return
             } catch {
                 statusMessage = "Cloud estimate unavailable — using on-device recognition."
@@ -292,6 +319,7 @@ final class ScannerViewModel {
         // directly rather than through the stabilizer.
         region = nil
         publish(results)
+        detection?.imageData = thumbnail
     }
 
     private func clearDetection() {
@@ -404,7 +432,10 @@ final class ScannerViewModel {
         guard detection == nil, !isAnalyzing else { return }
 
         frameSize = CGSize(width: CVPixelBufferGetWidth(frame.buffer), height: CVPixelBufferGetHeight(frame.buffer))
-        guard let found = await regionDetector.detect(in: frame) else {
+        let signpost = Log.signposter.beginInterval("detect")
+        let detected = await regionDetector.detect(in: frame)
+        Log.signposter.endInterval("detect", signpost)
+        guard let found = detected else {
             missedFrames += 1
             // Tolerate brief dropouts so the box doesn't flicker.
             if missedFrames >= 4, region != nil {
@@ -431,7 +462,7 @@ final class ScannerViewModel {
             FoodCandidate(
                 rawLabel: result.label,
                 confidence: result.confidence,
-                nutrition: FoodNutritionMap.lookup(label: result.label)
+                nutrition: nutritionSource.nutrition(forLabel: result.label)
             )
         }
         // Don't churn the UI when the reading hasn't actually changed.

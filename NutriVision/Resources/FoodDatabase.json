@@ -1,0 +1,2656 @@
+[
+ {
+  "name": "Apple",
+  "kcal": 52,
+  "protein": 0.3,
+  "carbs": 14,
+  "fat": 0.2,
+  "fiber": 2.4,
+  "sugar": 10.4,
+  "sodium_mg": 1,
+  "sat_fat": 0.03,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 182
+   },
+   {
+    "label": "1 small",
+    "grams": 149
+   },
+   {
+    "label": "1 cup sliced",
+    "grams": 109
+   }
+  ],
+  "aliases": "apples"
+ },
+ {
+  "name": "Banana",
+  "kcal": 89,
+  "protein": 1.1,
+  "carbs": 23,
+  "fat": 0.3,
+  "fiber": 2.6,
+  "sugar": 12.2,
+  "sodium_mg": 1,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 118
+   },
+   {
+    "label": "1 large",
+    "grams": 136
+   },
+   {
+    "label": "1 cup sliced",
+    "grams": 150
+   }
+  ],
+  "aliases": "bananas"
+ },
+ {
+  "name": "Orange",
+  "kcal": 47,
+  "protein": 0.9,
+  "carbs": 12,
+  "fat": 0.1,
+  "fiber": 2.4,
+  "sugar": 9.4,
+  "sodium_mg": 0,
+  "sat_fat": 0.02,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 131
+   },
+   {
+    "label": "1 large",
+    "grams": 184
+   }
+  ],
+  "aliases": "oranges"
+ },
+ {
+  "name": "Strawberries",
+  "kcal": 32,
+  "protein": 0.7,
+  "carbs": 7.7,
+  "fat": 0.3,
+  "fiber": 2,
+  "sugar": 4.9,
+  "sodium_mg": 1,
+  "sat_fat": 0.02,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 152
+   },
+   {
+    "label": "1 medium",
+    "grams": 12
+   }
+  ],
+  "aliases": "strawberry"
+ },
+ {
+  "name": "Blueberries",
+  "kcal": 57,
+  "protein": 0.7,
+  "carbs": 14.5,
+  "fat": 0.3,
+  "fiber": 2.4,
+  "sugar": 10,
+  "sodium_mg": 1,
+  "sat_fat": 0.03,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 148
+   },
+   {
+    "label": "1/2 cup",
+    "grams": 74
+   }
+  ],
+  "aliases": "blueberry"
+ },
+ {
+  "name": "Grapes",
+  "kcal": 69,
+  "protein": 0.7,
+  "carbs": 18,
+  "fat": 0.2,
+  "fiber": 0.9,
+  "sugar": 15.5,
+  "sodium_mg": 2,
+  "sat_fat": 0.05,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 151
+   },
+   {
+    "label": "10 grapes",
+    "grams": 49
+   }
+  ],
+  "aliases": "grape"
+ },
+ {
+  "name": "Watermelon",
+  "kcal": 30,
+  "protein": 0.6,
+  "carbs": 7.6,
+  "fat": 0.2,
+  "fiber": 0.4,
+  "sugar": 6.2,
+  "sodium_mg": 1,
+  "sat_fat": 0.02,
+  "servings": [
+   {
+    "label": "1 cup diced",
+    "grams": 152
+   },
+   {
+    "label": "1 wedge",
+    "grams": 286
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Pineapple",
+  "kcal": 50,
+  "protein": 0.5,
+  "carbs": 13,
+  "fat": 0.1,
+  "fiber": 1.4,
+  "sugar": 9.9,
+  "sodium_mg": 1,
+  "sat_fat": 0.01,
+  "servings": [
+   {
+    "label": "1 cup chunks",
+    "grams": 165
+   },
+   {
+    "label": "1 slice",
+    "grams": 84
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Mango",
+  "kcal": 60,
+  "protein": 0.8,
+  "carbs": 15,
+  "fat": 0.4,
+  "fiber": 1.6,
+  "sugar": 13.7,
+  "sodium_mg": 1,
+  "sat_fat": 0.09,
+  "servings": [
+   {
+    "label": "1 cup sliced",
+    "grams": 165
+   },
+   {
+    "label": "1 fruit",
+    "grams": 336
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Avocado",
+  "kcal": 160,
+  "protein": 2,
+  "carbs": 8.5,
+  "fat": 14.7,
+  "fiber": 6.7,
+  "sugar": 0.7,
+  "sodium_mg": 7,
+  "sat_fat": 2.1,
+  "servings": [
+   {
+    "label": "1/2 fruit",
+    "grams": 100
+   },
+   {
+    "label": "1 fruit",
+    "grams": 201
+   }
+  ],
+  "aliases": "guacamole base"
+ },
+ {
+  "name": "Peach",
+  "kcal": 39,
+  "protein": 0.9,
+  "carbs": 9.5,
+  "fat": 0.3,
+  "fiber": 1.5,
+  "sugar": 8.4,
+  "sodium_mg": 0,
+  "sat_fat": 0.02,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 150
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Pear",
+  "kcal": 57,
+  "protein": 0.4,
+  "carbs": 15,
+  "fat": 0.1,
+  "fiber": 3.1,
+  "sugar": 9.8,
+  "sodium_mg": 1,
+  "sat_fat": 0.01,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 178
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Kiwi",
+  "kcal": 61,
+  "protein": 1.1,
+  "carbs": 15,
+  "fat": 0.5,
+  "fiber": 3,
+  "sugar": 9,
+  "sodium_mg": 3,
+  "sat_fat": 0.03,
+  "servings": [
+   {
+    "label": "1 fruit",
+    "grams": 69
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Raisins",
+  "kcal": 299,
+  "protein": 3.1,
+  "carbs": 79,
+  "fat": 0.5,
+  "fiber": 3.7,
+  "sugar": 59,
+  "sodium_mg": 11,
+  "sat_fat": 0.14,
+  "servings": [
+   {
+    "label": "1 small box",
+    "grams": 43
+   },
+   {
+    "label": "1/4 cup",
+    "grams": 40
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Dates",
+  "kcal": 282,
+  "protein": 2.5,
+  "carbs": 75,
+  "fat": 0.4,
+  "fiber": 8,
+  "sugar": 63,
+  "sodium_mg": 2,
+  "sat_fat": 0.03,
+  "servings": [
+   {
+    "label": "1 date",
+    "grams": 24
+   }
+  ],
+  "aliases": "medjool"
+ },
+ {
+  "name": "Broccoli",
+  "kcal": 34,
+  "protein": 2.8,
+  "carbs": 6.6,
+  "fat": 0.4,
+  "fiber": 2.6,
+  "sugar": 1.7,
+  "sodium_mg": 33,
+  "sat_fat": 0.04,
+  "servings": [
+   {
+    "label": "1 cup chopped",
+    "grams": 91
+   },
+   {
+    "label": "1 stalk",
+    "grams": 151
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Carrot",
+  "kcal": 41,
+  "protein": 0.9,
+  "carbs": 9.6,
+  "fat": 0.2,
+  "fiber": 2.8,
+  "sugar": 4.7,
+  "sodium_mg": 69,
+  "sat_fat": 0.04,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 61
+   },
+   {
+    "label": "1 cup chopped",
+    "grams": 128
+   }
+  ],
+  "aliases": "carrots"
+ },
+ {
+  "name": "Spinach",
+  "kcal": 23,
+  "protein": 2.9,
+  "carbs": 3.6,
+  "fat": 0.4,
+  "fiber": 2.2,
+  "sugar": 0.4,
+  "sodium_mg": 79,
+  "sat_fat": 0.06,
+  "servings": [
+   {
+    "label": "1 cup raw",
+    "grams": 30
+   },
+   {
+    "label": "1 cup cooked",
+    "grams": 180
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Tomato",
+  "kcal": 18,
+  "protein": 0.9,
+  "carbs": 3.9,
+  "fat": 0.2,
+  "fiber": 1.2,
+  "sugar": 2.6,
+  "sodium_mg": 5,
+  "sat_fat": 0.03,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 123
+   },
+   {
+    "label": "1 cup chopped",
+    "grams": 180
+   }
+  ],
+  "aliases": "tomatoes"
+ },
+ {
+  "name": "Cucumber",
+  "kcal": 15,
+  "protein": 0.7,
+  "carbs": 3.6,
+  "fat": 0.1,
+  "fiber": 0.5,
+  "sugar": 1.7,
+  "sodium_mg": 2,
+  "sat_fat": 0.04,
+  "servings": [
+   {
+    "label": "1 cup sliced",
+    "grams": 104
+   },
+   {
+    "label": "1 medium",
+    "grams": 301
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Lettuce",
+  "kcal": 15,
+  "protein": 1.4,
+  "carbs": 2.9,
+  "fat": 0.2,
+  "fiber": 1.3,
+  "sugar": 0.8,
+  "sodium_mg": 28,
+  "sat_fat": 0.02,
+  "servings": [
+   {
+    "label": "1 cup shredded",
+    "grams": 47
+   }
+  ],
+  "aliases": "romaine salad greens"
+ },
+ {
+  "name": "Bell Pepper",
+  "kcal": 31,
+  "protein": 1,
+  "carbs": 6,
+  "fat": 0.3,
+  "fiber": 2.1,
+  "sugar": 4.2,
+  "sodium_mg": 4,
+  "sat_fat": 0.03,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 119
+   },
+   {
+    "label": "1 cup chopped",
+    "grams": 149
+   }
+  ],
+  "aliases": "capsicum"
+ },
+ {
+  "name": "Onion",
+  "kcal": 40,
+  "protein": 1.1,
+  "carbs": 9.3,
+  "fat": 0.1,
+  "fiber": 1.7,
+  "sugar": 4.2,
+  "sodium_mg": 4,
+  "sat_fat": 0.04,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 110
+   },
+   {
+    "label": "1/2 cup chopped",
+    "grams": 80
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Potato (baked)",
+  "kcal": 93,
+  "protein": 2.5,
+  "carbs": 21,
+  "fat": 0.1,
+  "fiber": 2.2,
+  "sugar": 1.2,
+  "sodium_mg": 10,
+  "sat_fat": 0.03,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 173
+   },
+   {
+    "label": "1 large",
+    "grams": 299
+   }
+  ],
+  "aliases": "baked potato"
+ },
+ {
+  "name": "Sweet Potato (baked)",
+  "kcal": 90,
+  "protein": 2,
+  "carbs": 21,
+  "fat": 0.2,
+  "fiber": 3.3,
+  "sugar": 6.5,
+  "sodium_mg": 36,
+  "sat_fat": 0.05,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 114
+   },
+   {
+    "label": "1 large",
+    "grams": 180
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Corn",
+  "kcal": 96,
+  "protein": 3.4,
+  "carbs": 21,
+  "fat": 1.5,
+  "fiber": 2.4,
+  "sugar": 4.5,
+  "sodium_mg": 15,
+  "sat_fat": 0.2,
+  "servings": [
+   {
+    "label": "1 ear",
+    "grams": 90
+   },
+   {
+    "label": "1/2 cup kernels",
+    "grams": 82
+   }
+  ],
+  "aliases": "sweetcorn"
+ },
+ {
+  "name": "Green Peas",
+  "kcal": 81,
+  "protein": 5.4,
+  "carbs": 14,
+  "fat": 0.4,
+  "fiber": 5.7,
+  "sugar": 5.7,
+  "sodium_mg": 5,
+  "sat_fat": 0.07,
+  "servings": [
+   {
+    "label": "1/2 cup",
+    "grams": 80
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Mushrooms",
+  "kcal": 22,
+  "protein": 3.1,
+  "carbs": 3.3,
+  "fat": 0.3,
+  "fiber": 1,
+  "sugar": 2,
+  "sodium_mg": 5,
+  "sat_fat": 0.05,
+  "servings": [
+   {
+    "label": "1 cup sliced",
+    "grams": 70
+   }
+  ],
+  "aliases": "mushroom"
+ },
+ {
+  "name": "Cauliflower",
+  "kcal": 25,
+  "protein": 1.9,
+  "carbs": 5,
+  "fat": 0.3,
+  "fiber": 2,
+  "sugar": 1.9,
+  "sodium_mg": 30,
+  "sat_fat": 0.13,
+  "servings": [
+   {
+    "label": "1 cup chopped",
+    "grams": 107
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Zucchini",
+  "kcal": 17,
+  "protein": 1.2,
+  "carbs": 3.1,
+  "fat": 0.3,
+  "fiber": 1,
+  "sugar": 2.5,
+  "sodium_mg": 8,
+  "sat_fat": 0.08,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 196
+   },
+   {
+    "label": "1 cup sliced",
+    "grams": 113
+   }
+  ],
+  "aliases": "courgette"
+ },
+ {
+  "name": "Cabbage",
+  "kcal": 25,
+  "protein": 1.3,
+  "carbs": 5.8,
+  "fat": 0.1,
+  "fiber": 2.5,
+  "sugar": 3.2,
+  "sodium_mg": 18,
+  "sat_fat": 0.03,
+  "servings": [
+   {
+    "label": "1 cup shredded",
+    "grams": 70
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "White Rice (cooked)",
+  "kcal": 130,
+  "protein": 2.7,
+  "carbs": 28,
+  "fat": 0.3,
+  "fiber": 0.4,
+  "sugar": 0.1,
+  "sodium_mg": 1,
+  "sat_fat": 0.08,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 158
+   },
+   {
+    "label": "1/2 cup",
+    "grams": 79
+   }
+  ],
+  "aliases": "rice steamed"
+ },
+ {
+  "name": "Brown Rice (cooked)",
+  "kcal": 123,
+  "protein": 2.7,
+  "carbs": 26,
+  "fat": 1,
+  "fiber": 1.6,
+  "sugar": 0.2,
+  "sodium_mg": 4,
+  "sat_fat": 0.2,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 195
+   },
+   {
+    "label": "1/2 cup",
+    "grams": 98
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Pasta (cooked)",
+  "kcal": 158,
+  "protein": 5.8,
+  "carbs": 31,
+  "fat": 0.9,
+  "fiber": 1.8,
+  "sugar": 0.6,
+  "sodium_mg": 1,
+  "sat_fat": 0.18,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 140
+   },
+   {
+    "label": "2 oz dry",
+    "grams": 56
+   }
+  ],
+  "aliases": "spaghetti noodles macaroni"
+ },
+ {
+  "name": "Oatmeal (cooked)",
+  "kcal": 71,
+  "protein": 2.5,
+  "carbs": 12,
+  "fat": 1.5,
+  "fiber": 1.7,
+  "sugar": 0.3,
+  "sodium_mg": 49,
+  "sat_fat": 0.26,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 234
+   },
+   {
+    "label": "1/2 cup",
+    "grams": 117
+   }
+  ],
+  "aliases": "porridge oats"
+ },
+ {
+  "name": "Rolled Oats (dry)",
+  "kcal": 379,
+  "protein": 13,
+  "carbs": 68,
+  "fat": 6.5,
+  "fiber": 10,
+  "sugar": 1,
+  "sodium_mg": 6,
+  "sat_fat": 1.2,
+  "servings": [
+   {
+    "label": "1/2 cup",
+    "grams": 40
+   },
+   {
+    "label": "1/4 cup",
+    "grams": 20
+   }
+  ],
+  "aliases": "oats"
+ },
+ {
+  "name": "White Bread",
+  "kcal": 265,
+  "protein": 9,
+  "carbs": 49,
+  "fat": 3.2,
+  "fiber": 2.7,
+  "sugar": 5,
+  "sodium_mg": 491,
+  "sat_fat": 0.7,
+  "servings": [
+   {
+    "label": "1 slice",
+    "grams": 30
+   }
+  ],
+  "aliases": "toast"
+ },
+ {
+  "name": "Whole Wheat Bread",
+  "kcal": 252,
+  "protein": 12.5,
+  "carbs": 43,
+  "fat": 3.5,
+  "fiber": 6,
+  "sugar": 6,
+  "sodium_mg": 450,
+  "sat_fat": 0.7,
+  "servings": [
+   {
+    "label": "1 slice",
+    "grams": 32
+   }
+  ],
+  "aliases": "brown bread"
+ },
+ {
+  "name": "Bagel",
+  "kcal": 257,
+  "protein": 10,
+  "carbs": 50,
+  "fat": 1.6,
+  "fiber": 2.1,
+  "sugar": 6,
+  "sodium_mg": 439,
+  "sat_fat": 0.3,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 105
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Tortilla (flour)",
+  "kcal": 304,
+  "protein": 8,
+  "carbs": 50,
+  "fat": 7.6,
+  "fiber": 2.7,
+  "sugar": 3,
+  "sodium_mg": 700,
+  "sat_fat": 2.2,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 49
+   },
+   {
+    "label": "1 large",
+    "grams": 72
+   }
+  ],
+  "aliases": "wrap"
+ },
+ {
+  "name": "Quinoa (cooked)",
+  "kcal": 120,
+  "protein": 4.4,
+  "carbs": 21,
+  "fat": 1.9,
+  "fiber": 2.8,
+  "sugar": 0.9,
+  "sodium_mg": 7,
+  "sat_fat": 0.23,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 185
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Cornflakes",
+  "kcal": 357,
+  "protein": 7.5,
+  "carbs": 84,
+  "fat": 0.4,
+  "fiber": 3.3,
+  "sugar": 10,
+  "sodium_mg": 730,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 28
+   }
+  ],
+  "aliases": "cereal"
+ },
+ {
+  "name": "Granola",
+  "kcal": 471,
+  "protein": 10,
+  "carbs": 64,
+  "fat": 20,
+  "fiber": 7,
+  "sugar": 24,
+  "sodium_mg": 26,
+  "sat_fat": 3.7,
+  "servings": [
+   {
+    "label": "1/2 cup",
+    "grams": 56
+   }
+  ],
+  "aliases": "muesli"
+ },
+ {
+  "name": "Pancake",
+  "kcal": 227,
+  "protein": 6.4,
+  "carbs": 28,
+  "fat": 10,
+  "fiber": 1.2,
+  "sugar": 5,
+  "sodium_mg": 439,
+  "sat_fat": 2.1,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 38
+   },
+   {
+    "label": "2 medium",
+    "grams": 76
+   }
+  ],
+  "aliases": "pancakes"
+ },
+ {
+  "name": "Croissant",
+  "kcal": 406,
+  "protein": 8.2,
+  "carbs": 46,
+  "fat": 21,
+  "fiber": 2.6,
+  "sugar": 11,
+  "sodium_mg": 400,
+  "sat_fat": 12,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 57
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Chicken Breast (cooked)",
+  "kcal": 165,
+  "protein": 31,
+  "carbs": 0,
+  "fat": 3.6,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 74,
+  "sat_fat": 1,
+  "servings": [
+   {
+    "label": "1 breast",
+    "grams": 172
+   },
+   {
+    "label": "3 oz",
+    "grams": 85
+   },
+   {
+    "label": "100 g",
+    "grams": 100
+   }
+  ],
+  "aliases": "grilled chicken"
+ },
+ {
+  "name": "Chicken Thigh (cooked)",
+  "kcal": 209,
+  "protein": 26,
+  "carbs": 0,
+  "fat": 10.9,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 84,
+  "sat_fat": 3,
+  "servings": [
+   {
+    "label": "1 thigh",
+    "grams": 116
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Beef Steak (cooked)",
+  "kcal": 271,
+  "protein": 26,
+  "carbs": 0,
+  "fat": 18,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 55,
+  "sat_fat": 7.5,
+  "servings": [
+   {
+    "label": "6 oz",
+    "grams": 170
+   },
+   {
+    "label": "3 oz",
+    "grams": 85
+   }
+  ],
+  "aliases": "sirloin"
+ },
+ {
+  "name": "Ground Beef (cooked)",
+  "kcal": 250,
+  "protein": 26,
+  "carbs": 0,
+  "fat": 15,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 72,
+  "sat_fat": 6,
+  "servings": [
+   {
+    "label": "3 oz",
+    "grams": 85
+   },
+   {
+    "label": "1 patty",
+    "grams": 113
+   }
+  ],
+  "aliases": "mince hamburger patty"
+ },
+ {
+  "name": "Pork Chop (cooked)",
+  "kcal": 231,
+  "protein": 26,
+  "carbs": 0,
+  "fat": 14,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 60,
+  "sat_fat": 5,
+  "servings": [
+   {
+    "label": "1 chop",
+    "grams": 145
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Bacon (cooked)",
+  "kcal": 541,
+  "protein": 37,
+  "carbs": 1.4,
+  "fat": 42,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 1717,
+  "sat_fat": 14,
+  "servings": [
+   {
+    "label": "1 slice",
+    "grams": 8
+   },
+   {
+    "label": "3 slices",
+    "grams": 24
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Ham",
+  "kcal": 145,
+  "protein": 21,
+  "carbs": 1.5,
+  "fat": 5.5,
+  "fiber": 0,
+  "sugar": 0.5,
+  "sodium_mg": 1203,
+  "sat_fat": 1.8,
+  "servings": [
+   {
+    "label": "2 slices",
+    "grams": 56
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Turkey Breast",
+  "kcal": 135,
+  "protein": 30,
+  "carbs": 0,
+  "fat": 1,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 55,
+  "sat_fat": 0.3,
+  "servings": [
+   {
+    "label": "3 oz",
+    "grams": 85
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Salmon (cooked)",
+  "kcal": 206,
+  "protein": 22,
+  "carbs": 0,
+  "fat": 12,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 61,
+  "sat_fat": 2.5,
+  "servings": [
+   {
+    "label": "1 fillet",
+    "grams": 154
+   },
+   {
+    "label": "3 oz",
+    "grams": 85
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Tuna (canned)",
+  "kcal": 116,
+  "protein": 26,
+  "carbs": 0,
+  "fat": 0.8,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 247,
+  "sat_fat": 0.2,
+  "servings": [
+   {
+    "label": "1 can",
+    "grams": 142
+   },
+   {
+    "label": "3 oz",
+    "grams": 85
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Shrimp (cooked)",
+  "kcal": 99,
+  "protein": 24,
+  "carbs": 0.2,
+  "fat": 0.3,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 111,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "3 oz",
+    "grams": 85
+   },
+   {
+    "label": "6 large",
+    "grams": 42
+   }
+  ],
+  "aliases": "prawns"
+ },
+ {
+  "name": "Cod (cooked)",
+  "kcal": 105,
+  "protein": 23,
+  "carbs": 0,
+  "fat": 0.9,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 78,
+  "sat_fat": 0.2,
+  "servings": [
+   {
+    "label": "1 fillet",
+    "grams": 180
+   }
+  ],
+  "aliases": "white fish"
+ },
+ {
+  "name": "Egg",
+  "kcal": 143,
+  "protein": 12.6,
+  "carbs": 0.7,
+  "fat": 9.5,
+  "fiber": 0,
+  "sugar": 0.4,
+  "sodium_mg": 142,
+  "sat_fat": 3.1,
+  "servings": [
+   {
+    "label": "1 large",
+    "grams": 50
+   },
+   {
+    "label": "2 large",
+    "grams": 100
+   }
+  ],
+  "aliases": "eggs boiled fried"
+ },
+ {
+  "name": "Egg White",
+  "kcal": 52,
+  "protein": 11,
+  "carbs": 0.7,
+  "fat": 0.2,
+  "fiber": 0,
+  "sugar": 0.7,
+  "sodium_mg": 166,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 large",
+    "grams": 33
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Tofu",
+  "kcal": 76,
+  "protein": 8,
+  "carbs": 1.9,
+  "fat": 4.8,
+  "fiber": 0.3,
+  "sugar": 0.6,
+  "sodium_mg": 7,
+  "sat_fat": 0.7,
+  "servings": [
+   {
+    "label": "1/2 cup",
+    "grams": 126
+   },
+   {
+    "label": "3 oz",
+    "grams": 85
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Lentils (cooked)",
+  "kcal": 116,
+  "protein": 9,
+  "carbs": 20,
+  "fat": 0.4,
+  "fiber": 7.9,
+  "sugar": 1.8,
+  "sodium_mg": 2,
+  "sat_fat": 0.05,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 198
+   },
+   {
+    "label": "1/2 cup",
+    "grams": 99
+   }
+  ],
+  "aliases": "dal"
+ },
+ {
+  "name": "Chickpeas (cooked)",
+  "kcal": 164,
+  "protein": 8.9,
+  "carbs": 27,
+  "fat": 2.6,
+  "fiber": 7.6,
+  "sugar": 4.8,
+  "sodium_mg": 7,
+  "sat_fat": 0.27,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 164
+   },
+   {
+    "label": "1/2 cup",
+    "grams": 82
+   }
+  ],
+  "aliases": "garbanzo"
+ },
+ {
+  "name": "Black Beans (cooked)",
+  "kcal": 132,
+  "protein": 8.9,
+  "carbs": 24,
+  "fat": 0.5,
+  "fiber": 8.7,
+  "sugar": 0.3,
+  "sodium_mg": 1,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 172
+   },
+   {
+    "label": "1/2 cup",
+    "grams": 86
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Kidney Beans (cooked)",
+  "kcal": 127,
+  "protein": 8.7,
+  "carbs": 23,
+  "fat": 0.5,
+  "fiber": 6.4,
+  "sugar": 0.3,
+  "sodium_mg": 2,
+  "sat_fat": 0.07,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 177
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Hummus",
+  "kcal": 166,
+  "protein": 8,
+  "carbs": 14,
+  "fat": 10,
+  "fiber": 6,
+  "sugar": 0.3,
+  "sodium_mg": 379,
+  "sat_fat": 1.4,
+  "servings": [
+   {
+    "label": "2 tbsp",
+    "grams": 30
+   },
+   {
+    "label": "1/4 cup",
+    "grams": 62
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Milk (whole)",
+  "kcal": 61,
+  "protein": 3.2,
+  "carbs": 4.8,
+  "fat": 3.3,
+  "fiber": 0,
+  "sugar": 5.1,
+  "sodium_mg": 43,
+  "sat_fat": 1.9,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 244
+   },
+   {
+    "label": "1 glass",
+    "grams": 244
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Milk (skim)",
+  "kcal": 34,
+  "protein": 3.4,
+  "carbs": 5,
+  "fat": 0.1,
+  "fiber": 0,
+  "sugar": 5,
+  "sodium_mg": 42,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 245
+   }
+  ],
+  "aliases": "nonfat"
+ },
+ {
+  "name": "Yogurt (plain)",
+  "kcal": 61,
+  "protein": 3.5,
+  "carbs": 4.7,
+  "fat": 3.3,
+  "fiber": 0,
+  "sugar": 4.7,
+  "sodium_mg": 46,
+  "sat_fat": 2.1,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 245
+   },
+   {
+    "label": "1 container",
+    "grams": 170
+   }
+  ],
+  "aliases": "yoghurt curd"
+ },
+ {
+  "name": "Greek Yogurt (plain)",
+  "kcal": 59,
+  "protein": 10,
+  "carbs": 3.6,
+  "fat": 0.4,
+  "fiber": 0,
+  "sugar": 3.2,
+  "sodium_mg": 36,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 245
+   },
+   {
+    "label": "1 container",
+    "grams": 170
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Cheddar Cheese",
+  "kcal": 403,
+  "protein": 25,
+  "carbs": 1.3,
+  "fat": 33,
+  "fiber": 0,
+  "sugar": 0.5,
+  "sodium_mg": 653,
+  "sat_fat": 21,
+  "servings": [
+   {
+    "label": "1 slice",
+    "grams": 28
+   },
+   {
+    "label": "1 oz",
+    "grams": 28
+   }
+  ],
+  "aliases": "cheese"
+ },
+ {
+  "name": "Mozzarella",
+  "kcal": 280,
+  "protein": 28,
+  "carbs": 3.1,
+  "fat": 17,
+  "fiber": 0,
+  "sugar": 1,
+  "sodium_mg": 627,
+  "sat_fat": 10,
+  "servings": [
+   {
+    "label": "1 oz",
+    "grams": 28
+   },
+   {
+    "label": "1/2 cup shredded",
+    "grams": 56
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Cottage Cheese",
+  "kcal": 98,
+  "protein": 11,
+  "carbs": 3.4,
+  "fat": 4.3,
+  "fiber": 0,
+  "sugar": 2.7,
+  "sodium_mg": 364,
+  "sat_fat": 1.7,
+  "servings": [
+   {
+    "label": "1/2 cup",
+    "grams": 113
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Butter",
+  "kcal": 717,
+  "protein": 0.9,
+  "carbs": 0.1,
+  "fat": 81,
+  "fiber": 0,
+  "sugar": 0.1,
+  "sodium_mg": 11,
+  "sat_fat": 51,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 14
+   },
+   {
+    "label": "1 tsp",
+    "grams": 5
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Cream Cheese",
+  "kcal": 342,
+  "protein": 6,
+  "carbs": 4,
+  "fat": 34,
+  "fiber": 0,
+  "sugar": 3.2,
+  "sodium_mg": 321,
+  "sat_fat": 19,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 14
+   },
+   {
+    "label": "2 tbsp",
+    "grams": 29
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Ice Cream (vanilla)",
+  "kcal": 207,
+  "protein": 3.5,
+  "carbs": 24,
+  "fat": 11,
+  "fiber": 0.7,
+  "sugar": 21,
+  "sodium_mg": 80,
+  "sat_fat": 6.8,
+  "servings": [
+   {
+    "label": "1/2 cup",
+    "grams": 66
+   },
+   {
+    "label": "1 cup",
+    "grams": 132
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Soy Milk",
+  "kcal": 33,
+  "protein": 2.9,
+  "carbs": 1.7,
+  "fat": 1.6,
+  "fiber": 0.4,
+  "sugar": 0.6,
+  "sodium_mg": 51,
+  "sat_fat": 0.2,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 243
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Almond Milk (unsweetened)",
+  "kcal": 15,
+  "protein": 0.6,
+  "carbs": 0.3,
+  "fat": 1.2,
+  "fiber": 0.3,
+  "sugar": 0,
+  "sodium_mg": 72,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 240
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Almonds",
+  "kcal": 579,
+  "protein": 21,
+  "carbs": 22,
+  "fat": 50,
+  "fiber": 12.5,
+  "sugar": 4.4,
+  "sodium_mg": 1,
+  "sat_fat": 3.8,
+  "servings": [
+   {
+    "label": "1 oz",
+    "grams": 28
+   },
+   {
+    "label": "1/4 cup",
+    "grams": 36
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Peanuts",
+  "kcal": 567,
+  "protein": 26,
+  "carbs": 16,
+  "fat": 49,
+  "fiber": 8.5,
+  "sugar": 4.7,
+  "sodium_mg": 18,
+  "sat_fat": 6.8,
+  "servings": [
+   {
+    "label": "1 oz",
+    "grams": 28
+   },
+   {
+    "label": "1/4 cup",
+    "grams": 37
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Peanut Butter",
+  "kcal": 588,
+  "protein": 25,
+  "carbs": 20,
+  "fat": 50,
+  "fiber": 6,
+  "sugar": 9,
+  "sodium_mg": 426,
+  "sat_fat": 10,
+  "servings": [
+   {
+    "label": "2 tbsp",
+    "grams": 32
+   },
+   {
+    "label": "1 tbsp",
+    "grams": 16
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Walnuts",
+  "kcal": 654,
+  "protein": 15,
+  "carbs": 14,
+  "fat": 65,
+  "fiber": 6.7,
+  "sugar": 2.6,
+  "sodium_mg": 2,
+  "sat_fat": 6.1,
+  "servings": [
+   {
+    "label": "1 oz",
+    "grams": 28
+   },
+   {
+    "label": "1/4 cup",
+    "grams": 30
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Cashews",
+  "kcal": 553,
+  "protein": 18,
+  "carbs": 30,
+  "fat": 44,
+  "fiber": 3.3,
+  "sugar": 6,
+  "sodium_mg": 12,
+  "sat_fat": 7.8,
+  "servings": [
+   {
+    "label": "1 oz",
+    "grams": 28
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Olive Oil",
+  "kcal": 884,
+  "protein": 0,
+  "carbs": 0,
+  "fat": 100,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 2,
+  "sat_fat": 13.8,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 13.5
+   },
+   {
+    "label": "1 tsp",
+    "grams": 4.5
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Vegetable Oil",
+  "kcal": 884,
+  "protein": 0,
+  "carbs": 0,
+  "fat": 100,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 0,
+  "sat_fat": 7,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 14
+   }
+  ],
+  "aliases": "canola sunflower"
+ },
+ {
+  "name": "Mayonnaise",
+  "kcal": 680,
+  "protein": 1,
+  "carbs": 0.6,
+  "fat": 75,
+  "fiber": 0,
+  "sugar": 0.6,
+  "sodium_mg": 635,
+  "sat_fat": 11,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 14
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Chia Seeds",
+  "kcal": 486,
+  "protein": 17,
+  "carbs": 42,
+  "fat": 31,
+  "fiber": 34,
+  "sugar": 0,
+  "sodium_mg": 16,
+  "sat_fat": 3.3,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 12
+   },
+   {
+    "label": "1 oz",
+    "grams": 28
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Potato Chips",
+  "kcal": 536,
+  "protein": 7,
+  "carbs": 53,
+  "fat": 35,
+  "fiber": 4.4,
+  "sugar": 0.3,
+  "sodium_mg": 525,
+  "sat_fat": 3.1,
+  "servings": [
+   {
+    "label": "1 small bag",
+    "grams": 28
+   },
+   {
+    "label": "1 oz",
+    "grams": 28
+   }
+  ],
+  "aliases": "crisps"
+ },
+ {
+  "name": "Popcorn (air-popped)",
+  "kcal": 387,
+  "protein": 13,
+  "carbs": 78,
+  "fat": 4.5,
+  "fiber": 15,
+  "sugar": 0.9,
+  "sodium_mg": 8,
+  "sat_fat": 0.6,
+  "servings": [
+   {
+    "label": "3 cups",
+    "grams": 24
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Chocolate (milk)",
+  "kcal": 535,
+  "protein": 7.7,
+  "carbs": 59,
+  "fat": 30,
+  "fiber": 3.4,
+  "sugar": 52,
+  "sodium_mg": 79,
+  "sat_fat": 18.5,
+  "servings": [
+   {
+    "label": "1 bar",
+    "grams": 43
+   },
+   {
+    "label": "1 oz",
+    "grams": 28
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Dark Chocolate",
+  "kcal": 598,
+  "protein": 7.8,
+  "carbs": 46,
+  "fat": 43,
+  "fiber": 11,
+  "sugar": 24,
+  "sodium_mg": 20,
+  "sat_fat": 24,
+  "servings": [
+   {
+    "label": "1 oz",
+    "grams": 28
+   },
+   {
+    "label": "2 squares",
+    "grams": 20
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Cookie (chocolate chip)",
+  "kcal": 488,
+  "protein": 5,
+  "carbs": 64,
+  "fat": 24,
+  "fiber": 2.5,
+  "sugar": 34,
+  "sodium_mg": 370,
+  "sat_fat": 10,
+  "servings": [
+   {
+    "label": "1 cookie",
+    "grams": 30
+   }
+  ],
+  "aliases": "biscuit"
+ },
+ {
+  "name": "Donut",
+  "kcal": 421,
+  "protein": 4.9,
+  "carbs": 51,
+  "fat": 22,
+  "fiber": 1.4,
+  "sugar": 23,
+  "sodium_mg": 326,
+  "sat_fat": 5,
+  "servings": [
+   {
+    "label": "1 medium",
+    "grams": 60
+   }
+  ],
+  "aliases": "doughnut"
+ },
+ {
+  "name": "Sugar",
+  "kcal": 387,
+  "protein": 0,
+  "carbs": 100,
+  "fat": 0,
+  "fiber": 0,
+  "sugar": 100,
+  "sodium_mg": 1,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 tsp",
+    "grams": 4
+   },
+   {
+    "label": "1 tbsp",
+    "grams": 12.5
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Honey",
+  "kcal": 304,
+  "protein": 0.3,
+  "carbs": 82,
+  "fat": 0,
+  "fiber": 0.2,
+  "sugar": 82,
+  "sodium_mg": 4,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 21
+   },
+   {
+    "label": "1 tsp",
+    "grams": 7
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Jam",
+  "kcal": 250,
+  "protein": 0.4,
+  "carbs": 64,
+  "fat": 0.1,
+  "fiber": 1,
+  "sugar": 49,
+  "sodium_mg": 32,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 20
+   }
+  ],
+  "aliases": "jelly"
+ },
+ {
+  "name": "Protein Bar",
+  "kcal": 380,
+  "protein": 30,
+  "carbs": 38,
+  "fat": 12,
+  "fiber": 6,
+  "sugar": 20,
+  "sodium_mg": 200,
+  "sat_fat": 5,
+  "servings": [
+   {
+    "label": "1 bar",
+    "grams": 60
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Pizza (cheese)",
+  "kcal": 266,
+  "protein": 11,
+  "carbs": 33,
+  "fat": 10,
+  "fiber": 2.3,
+  "sugar": 3.6,
+  "sodium_mg": 598,
+  "sat_fat": 4.5,
+  "servings": [
+   {
+    "label": "1 slice",
+    "grams": 107
+   },
+   {
+    "label": "2 slices",
+    "grams": 214
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Cheeseburger",
+  "kcal": 295,
+  "protein": 15,
+  "carbs": 30,
+  "fat": 14,
+  "fiber": 1.3,
+  "sugar": 6,
+  "sodium_mg": 530,
+  "sat_fat": 6,
+  "servings": [
+   {
+    "label": "1 burger",
+    "grams": 119
+   },
+   {
+    "label": "1 large",
+    "grams": 180
+   }
+  ],
+  "aliases": "burger"
+ },
+ {
+  "name": "Hot Dog",
+  "kcal": 290,
+  "protein": 10,
+  "carbs": 4,
+  "fat": 26,
+  "fiber": 0,
+  "sugar": 2,
+  "sodium_mg": 1100,
+  "sat_fat": 9.5,
+  "servings": [
+   {
+    "label": "1 hot dog with bun",
+    "grams": 98
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "French Fries",
+  "kcal": 312,
+  "protein": 3.4,
+  "carbs": 41,
+  "fat": 15,
+  "fiber": 3.8,
+  "sugar": 0.3,
+  "sodium_mg": 210,
+  "sat_fat": 2.3,
+  "servings": [
+   {
+    "label": "small serving",
+    "grams": 71
+   },
+   {
+    "label": "medium serving",
+    "grams": 117
+   }
+  ],
+  "aliases": "chips fries"
+ },
+ {
+  "name": "Fried Chicken",
+  "kcal": 246,
+  "protein": 19,
+  "carbs": 10,
+  "fat": 14,
+  "fiber": 0.5,
+  "sugar": 0,
+  "sodium_mg": 650,
+  "sat_fat": 3.7,
+  "servings": [
+   {
+    "label": "1 piece",
+    "grams": 100
+   },
+   {
+    "label": "1 drumstick",
+    "grams": 70
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Chicken Sandwich",
+  "kcal": 240,
+  "protein": 15,
+  "carbs": 26,
+  "fat": 8,
+  "fiber": 1.5,
+  "sugar": 4,
+  "sodium_mg": 520,
+  "sat_fat": 1.8,
+  "servings": [
+   {
+    "label": "1 sandwich",
+    "grams": 180
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Burrito",
+  "kcal": 206,
+  "protein": 8,
+  "carbs": 27,
+  "fat": 7,
+  "fiber": 3,
+  "sugar": 2,
+  "sodium_mg": 520,
+  "sat_fat": 2.9,
+  "servings": [
+   {
+    "label": "1 burrito",
+    "grams": 250
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Taco",
+  "kcal": 226,
+  "protein": 9.7,
+  "carbs": 20,
+  "fat": 12,
+  "fiber": 3.5,
+  "sugar": 1,
+  "sodium_mg": 397,
+  "sat_fat": 4.4,
+  "servings": [
+   {
+    "label": "1 taco",
+    "grams": 78
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Sushi Roll",
+  "kcal": 145,
+  "protein": 5,
+  "carbs": 28,
+  "fat": 0.7,
+  "fiber": 1,
+  "sugar": 5,
+  "sodium_mg": 428,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "6 pieces",
+    "grams": 150
+   }
+  ],
+  "aliases": "maki"
+ },
+ {
+  "name": "Fried Rice",
+  "kcal": 163,
+  "protein": 4.5,
+  "carbs": 25,
+  "fat": 5,
+  "fiber": 1,
+  "sugar": 0.8,
+  "sodium_mg": 470,
+  "sat_fat": 1,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 198
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Mac and Cheese",
+  "kcal": 164,
+  "protein": 6.7,
+  "carbs": 20,
+  "fat": 6.7,
+  "fiber": 1,
+  "sugar": 3,
+  "sodium_mg": 450,
+  "sat_fat": 3.5,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 200
+   }
+  ],
+  "aliases": "macaroni cheese"
+ },
+ {
+  "name": "Lasagna",
+  "kcal": 135,
+  "protein": 8,
+  "carbs": 13,
+  "fat": 5.7,
+  "fiber": 1.1,
+  "sugar": 3.4,
+  "sodium_mg": 346,
+  "sat_fat": 2.9,
+  "servings": [
+   {
+    "label": "1 piece",
+    "grams": 250
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Caesar Salad",
+  "kcal": 127,
+  "protein": 5,
+  "carbs": 6,
+  "fat": 10,
+  "fiber": 1.6,
+  "sugar": 1.5,
+  "sodium_mg": 320,
+  "sat_fat": 2.4,
+  "servings": [
+   {
+    "label": "1 bowl",
+    "grams": 200
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Chicken Curry",
+  "kcal": 130,
+  "protein": 10,
+  "carbs": 6,
+  "fat": 7.5,
+  "fiber": 1,
+  "sugar": 3,
+  "sodium_mg": 350,
+  "sat_fat": 2.4,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 240
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Chili",
+  "kcal": 105,
+  "protein": 8,
+  "carbs": 10,
+  "fat": 4,
+  "fiber": 3,
+  "sugar": 2.5,
+  "sodium_mg": 420,
+  "sat_fat": 1.6,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 250
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Vegetable Soup",
+  "kcal": 40,
+  "protein": 1.5,
+  "carbs": 7,
+  "fat": 0.6,
+  "fiber": 1.4,
+  "sugar": 2.4,
+  "sodium_mg": 300,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 245
+   },
+   {
+    "label": "1 bowl",
+    "grams": 350
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Chicken Noodle Soup",
+  "kcal": 45,
+  "protein": 3.3,
+  "carbs": 5.5,
+  "fat": 1.2,
+  "fiber": 0.4,
+  "sugar": 0.8,
+  "sodium_mg": 340,
+  "sat_fat": 0.3,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 248
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Omelette",
+  "kcal": 154,
+  "protein": 10,
+  "carbs": 0.6,
+  "fat": 12,
+  "fiber": 0,
+  "sugar": 0.6,
+  "sodium_mg": 240,
+  "sat_fat": 3.6,
+  "servings": [
+   {
+    "label": "2-egg omelette",
+    "grams": 120
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Scrambled Eggs",
+  "kcal": 149,
+  "protein": 10,
+  "carbs": 1.6,
+  "fat": 11,
+  "fiber": 0,
+  "sugar": 1.4,
+  "sodium_mg": 145,
+  "sat_fat": 3.3,
+  "servings": [
+   {
+    "label": "2 eggs",
+    "grams": 122
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Sandwich (turkey)",
+  "kcal": 175,
+  "protein": 12,
+  "carbs": 20,
+  "fat": 5,
+  "fiber": 1.5,
+  "sugar": 3,
+  "sodium_mg": 560,
+  "sat_fat": 1.3,
+  "servings": [
+   {
+    "label": "1 sandwich",
+    "grams": 200
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Grilled Cheese",
+  "kcal": 330,
+  "protein": 13,
+  "carbs": 28,
+  "fat": 19,
+  "fiber": 1,
+  "sugar": 4,
+  "sodium_mg": 700,
+  "sat_fat": 9,
+  "servings": [
+   {
+    "label": "1 sandwich",
+    "grams": 120
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Coffee (black)",
+  "kcal": 1,
+  "protein": 0.1,
+  "carbs": 0,
+  "fat": 0,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 2,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 240
+   }
+  ],
+  "aliases": "americano"
+ },
+ {
+  "name": "Latte",
+  "kcal": 54,
+  "protein": 3.5,
+  "carbs": 5,
+  "fat": 2.2,
+  "fiber": 0,
+  "sugar": 5,
+  "sodium_mg": 45,
+  "sat_fat": 1.4,
+  "servings": [
+   {
+    "label": "1 medium (16 oz)",
+    "grams": 473
+   },
+   {
+    "label": "1 small (12 oz)",
+    "grams": 355
+   }
+  ],
+  "aliases": "cappuccino"
+ },
+ {
+  "name": "Tea (unsweetened)",
+  "kcal": 1,
+  "protein": 0,
+  "carbs": 0.3,
+  "fat": 0,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 3,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 240
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Orange Juice",
+  "kcal": 45,
+  "protein": 0.7,
+  "carbs": 10.4,
+  "fat": 0.2,
+  "fiber": 0.2,
+  "sugar": 8.4,
+  "sodium_mg": 1,
+  "sat_fat": 0.02,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 248
+   },
+   {
+    "label": "1 glass",
+    "grams": 248
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Apple Juice",
+  "kcal": 46,
+  "protein": 0.1,
+  "carbs": 11.4,
+  "fat": 0.1,
+  "fiber": 0.2,
+  "sugar": 9.6,
+  "sodium_mg": 4,
+  "sat_fat": 0.02,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 248
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Cola",
+  "kcal": 42,
+  "protein": 0,
+  "carbs": 10.6,
+  "fat": 0,
+  "fiber": 0,
+  "sugar": 10.6,
+  "sodium_mg": 4,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 can",
+    "grams": 355
+   },
+   {
+    "label": "1 bottle",
+    "grams": 500
+   }
+  ],
+  "aliases": "soda coke pepsi"
+ },
+ {
+  "name": "Beer",
+  "kcal": 43,
+  "protein": 0.5,
+  "carbs": 3.6,
+  "fat": 0,
+  "fiber": 0,
+  "sugar": 0,
+  "sodium_mg": 4,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 bottle",
+    "grams": 355
+   },
+   {
+    "label": "1 pint",
+    "grams": 473
+   }
+  ],
+  "aliases": "lager"
+ },
+ {
+  "name": "Red Wine",
+  "kcal": 85,
+  "protein": 0.1,
+  "carbs": 2.6,
+  "fat": 0,
+  "fiber": 0,
+  "sugar": 0.6,
+  "sodium_mg": 4,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 glass",
+    "grams": 150
+   }
+  ],
+  "aliases": "wine"
+ },
+ {
+  "name": "Sports Drink",
+  "kcal": 26,
+  "protein": 0,
+  "carbs": 6.4,
+  "fat": 0,
+  "fiber": 0,
+  "sugar": 5.8,
+  "sodium_mg": 41,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 bottle",
+    "grams": 591
+   }
+  ],
+  "aliases": "gatorade"
+ },
+ {
+  "name": "Protein Shake",
+  "kcal": 90,
+  "protein": 16,
+  "carbs": 5,
+  "fat": 1.5,
+  "fiber": 1,
+  "sugar": 3,
+  "sodium_mg": 100,
+  "sat_fat": 0.5,
+  "servings": [
+   {
+    "label": "1 scoop with water",
+    "grams": 300
+   }
+  ],
+  "aliases": "whey"
+ },
+ {
+  "name": "Smoothie (fruit)",
+  "kcal": 65,
+  "protein": 0.9,
+  "carbs": 15,
+  "fat": 0.3,
+  "fiber": 1.3,
+  "sugar": 12,
+  "sodium_mg": 5,
+  "sat_fat": 0.05,
+  "servings": [
+   {
+    "label": "1 cup",
+    "grams": 245
+   },
+   {
+    "label": "1 large",
+    "grams": 473
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Ketchup",
+  "kcal": 101,
+  "protein": 1,
+  "carbs": 27,
+  "fat": 0.1,
+  "fiber": 0.3,
+  "sugar": 22,
+  "sodium_mg": 907,
+  "sat_fat": 0,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 17
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Soy Sauce",
+  "kcal": 53,
+  "protein": 8,
+  "carbs": 5,
+  "fat": 0.6,
+  "fiber": 0.8,
+  "sugar": 0.4,
+  "sodium_mg": 5493,
+  "sat_fat": 0.1,
+  "servings": [
+   {
+    "label": "1 tbsp",
+    "grams": 16
+   }
+  ],
+  "aliases": ""
+ },
+ {
+  "name": "Ranch Dressing",
+  "kcal": 430,
+  "protein": 1,
+  "carbs": 6,
+  "fat": 45,
+  "fiber": 0,
+  "sugar": 4,
+  "sodium_mg": 1000,
+  "sat_fat": 7,
+  "servings": [
+   {
+    "label": "2 tbsp",
+    "grams": 30
+   }
+  ],
+  "aliases": "salad dressing"
+ }
+]

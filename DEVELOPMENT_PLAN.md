@@ -1,15 +1,9 @@
 # NutriVision — Advanced Development Plan
 
-## Current State
-- Scanner pipeline is solid: Neural Engine inference, frame backpressure, `DetectionStabilizer` (rolling majority vote), top-5 corrections.
-- **Main limit:** MobileNetV2 is a general ImageNet model. Only ~39 foods map to hardcoded nutrition values, it recognises one item per frame, and it does not estimate portion size.
-
-## Suggested Order
-1. Tier 1 Levels 0-1: barcode (in progress), label OCR, generic food detector
-2. Tier 1 Levels 2-3: Vision LLM + cache, portion buckets and slider
-3. Tier 3 onboarding and goals, Tier 4 HealthKit
-4. Widgets, App Intents, iCloud sync
-5. Insights, polish and CI alongside everything else
+## Status
+All tiers are implemented in code and the app + widget targets build. **Nothing has been run on a simulator or device yet**
+(see `SETUP.md` for the manual steps: capabilities, proxy deploy, detector model, watch embedding).
+Items marked `[~]` are built but need a real-device check or an external step.
 
 ---
 
@@ -41,52 +35,52 @@
 - [ ] Multi-food detection with per-item classification (revisit if Level 2 crops are not enough)
 
 ## Tier 2: Nutrition Data
-- [ ] Replace hardcoded dictionary in `FoodNutritionMap.swift` with a bundled database (USDA FoodData Central subset, SQLite/JSON)
-- [ ] Text search and manual entry
-- [ ] Micronutrients: fiber, sugar, sodium, saturated fat, key vitamins (extend `MealEntry` with a SwiftData `VersionedSchema` migration)
-- [ ] Serving units (grams, cups, pieces) with conversions
-- [ ] Custom foods and recipes
-- [ ] Favorites, recents, one-tap re-log
-- [ ] Meal types (breakfast, lunch, dinner, snack)
+- [x] Bundled database replaces the hardcoded dictionary for search/logging (`FoodDatabase.json`, 131 common foods, USDA-style per-100 g values written from memory: verify or replace with a real FDC export via `Scripts/generate_food_database.py`). The classifier tables (`FoodNutritionMap` + Food-101) still back photo recognition
+- [x] Text search and manual entry (`FoodSearchView`)
+- [x] Micronutrients: fiber, sugar, sodium, saturated fat on `MealEntry`/`NutritionProfile` (added with defaults, so SwiftData migrates the existing store lightweight; no `VersionedSchema` needed for additive fields)
+- [x] Serving units (household servings, grams, ounces) with conversion in `MealDetailView`
+- [x] Custom foods and recipes (`CustomFoodEditor`, `SavedFood`)
+- [x] Favorites, recents, one-tap re-log
+- [x] Meal types (auto-suggested by time of day, grouped on the dashboard)
 
 ## Tier 3: Personalization and Goals
-- [ ] Onboarding (age, sex, height, weight, activity) with Mifflin-St Jeor TDEE instead of fixed 1800 kcal (`DashboardViewModel.swift:30`)
-- [ ] Macro goals (grams or %) and diet presets (keto, high-protein, balanced)
-- [ ] Weight tracking with trend line and goal ETA
-- [ ] Water intake tracking
-- [ ] Adaptive goals based on weight trend vs. intake
+- [x] Onboarding with Mifflin-St Jeor TDEE replacing the fixed 1800 kcal (`OnboardingView`, `NutritionGoals`)
+- [x] Macro goals and diet presets (balanced, high-protein, low-carb, keto); rings and bars fill toward goals
+- [x] Weight tracking with smoothed trend line and goal ETA (`WeightView`)
+- [x] Water intake tracking (dashboard card, widget/Siri button)
+- [x] Adaptive goals from weight trend vs. intake (`AdaptiveGoal`, needs 14+ days of weights and 10 logged days)
 
 ## Tier 4: Apple Platform Integration
-- [ ] HealthKit: write dietary energy/macros; read active energy, weight, steps
-- [ ] WidgetKit home/lock screen widgets
-- [ ] Live Activity (fasting timer / daily goal)
-- [ ] App Intents / Siri / Shortcuts ("Log a banana", "How many calories left?")
-- [ ] Interactive widget button that opens the scanner
-- [ ] Apple Watch app (quick log, rings)
-- [ ] iCloud sync via SwiftData + CloudKit
-- [ ] Local notification meal reminders
+- [~] HealthKit: writes energy/macros/water/weight, reads active energy, steps, weight (`HealthService`). Needs the HealthKit capability
+- [~] WidgetKit home and lock screen widgets (`NutriVisionWidgets`). Needs the App Group capability to show real data
+- [~] Live Activity for the fasting timer (`FastingController`, `FastingLiveActivity`)
+- [~] App Intents / Siri / Shortcuts: Log Food, Calories Left, Add Water, Scan Food
+- [~] Interactive widget buttons (scan opens the app on the scanner; +250 ml water)
+- [~] Apple Watch app (`NutriVisionWatch`): rings, quick log, water. Not embedded in the iPhone app (see `SETUP.md`); source type-checks for watchOS but has not been built as a target on this machine (no watchOS runtime)
+- [~] iCloud sync via SwiftData + CloudKit (Settings toggle, applies on relaunch, falls back to local). Needs iCloud/CloudKit capability
+- [x] Local notification meal reminders (`ReminderService`)
 
 ## Tier 5: Insights and Analytics
-- [ ] Weekly/monthly trend charts (Swift Charts) for calories, macros, weight
-- [ ] Streaks and consistency score
-- [ ] On-device insight cards ("Protein below goal 5 of 7 days")
-- [ ] CSV/PDF export
+- [x] Weekly/monthly Swift Charts for calories (with goal line) and macros; weight chart in `WeightView`
+- [x] Streaks and consistency score
+- [x] On-device insight cards (protein below goal, over calories, low fiber, high sodium, water)
+- [x] CSV and PDF export (Insights menu and Settings)
 
 ## Tier 6: UX Polish
-- [ ] Haptics (`.sensoryFeedback`) on scan lock-on and save
-- [ ] Scan from photo library (`PhotosPicker`)
-- [ ] Save meal photo per `MealEntry` (`@Attribute(.externalStorage)`), thumbnails in History
-- [ ] Undo after delete; edit past meals
-- [ ] Accessibility: VoiceOver on rings/charts, Dynamic Type audit
-- [ ] Localization (String Catalogs) and metric/imperial units
-- [ ] Empty states, camera-permission-denied screen, torch toggle
+- [x] Haptics on lock-on, capture result, portion slider, water, save
+- [x] Scan from photo library (`PhotosPicker`)
+- [x] Meal photo thumbnail per entry (`@Attribute(.externalStorage)`), shown in lists
+- [x] Undo after delete (History); edit past meals (tap a row)
+- [x] Accessibility: labels/values on rings, bars and charts. A full VoiceOver + Dynamic Type pass on device is still worth doing
+- [x] Localization: String Catalog with Spanish (`Localizable.xcstrings`, ~110 strings) and metric/imperial units. Only strings in the catalog are translated
+- [x] Empty states, camera-permission-denied screen with Settings link, torch toggle
 
 ## Tier 7: Engineering Quality
-- [ ] Protocol-based dependency injection for `ClassifierService` and nutrition source
-- [ ] View model tests (Dashboard totals, History filtering, goal math)
-- [ ] UI tests for logging flow; snapshot tests
-- [ ] Instruments profiling (Core ML + Time Profiler), per-frame latency
-- [ ] Model evaluation harness (top-1/top-5 accuracy on a labeled test set)
-- [ ] CI: GitHub Actions running `xcodebuild test`
-- [ ] `os.Logger` logging and crash reporting
-- [ ] Privacy manifest (`PrivacyInfo.xcprivacy`) and App Store readiness
+- [x] Protocol-based DI: `FoodClassifying`, `NutritionSource`, `ProductLookup`, `VisionLLMClient`, `FoodRegionDetector`, `HealthStoring`
+- [x] View model tests (Dashboard totals, History filtering, goal math, scanner pipeline with stubs)
+- [~] UI tests for the logging flow written (`LoggingFlowUITests`, launch arg `-uiTesting`). Render smoke tests instead of pixel snapshots (no third-party snapshot library). None of the new tests have been run
+- [~] Instruments: `os_signpost` interval around per-frame detection; profiling itself must be done on a device
+- [x] Model evaluation harness (`ModelEvaluator`, `NUTRIVISION_EVAL_DIR`)
+- [x] CI: `.github/workflows/ci.yml` runs `xcodebuild test` (check the runner/Xcode version)
+- [x] `os.Logger` categories and MetricKit crash/hang diagnostics (no third-party SDK)
+- [x] Privacy manifest (`PrivacyInfo.xcprivacy`) for app and widget. Review the declared data types before submitting

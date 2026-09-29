@@ -6,6 +6,24 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1519F2170DB7906F6BA4EBC7 /* WatchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FADA5BB2E99F952BE0C3A3 /* WatchContentView.swift */; };
+		21DD6BBD37DFF84C475E9A68 /* NutriIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590EBD94EDECCB0DEEC4692A /* NutriIntents.swift */; };
+		21EBE76E04C5FAC8B8CACC60 /* FastingLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E19CFAD7A319A422A47BEB1 /* FastingLiveActivity.swift */; };
+		32CFE9D2FAD9A601AC28BADF /* DailySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7DF3BC674219F9A7ADBE2C /* DailySnapshot.swift */; };
+		3914CC8340F21266CFB0B5E6 /* NutriVisionWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BAB2DD47948592764C69E2 /* NutriVisionWidgetBundle.swift */; };
+		4E6EB05543382A0EA0B7FB43 /* NutriVisionWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CEDB1C7546C7F9B3F704BD55 /* NutriVisionWidgets.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		67141D738406781F87EDDBFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4BA15697EC33E5AE4B0C22 /* Foundation.framework */; };
+		7EE1A33FAF8BA0B809C46969 /* FastingActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129E163924CE2DF42DD4F3C0 /* FastingActivityAttributes.swift */; };
+		807D7B862E73E4BA20A752C7 /* CalorieWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B09B8940E1B83C814241D /* CalorieWidget.swift */; };
+		8C428CD80C66B148C134ED0D /* NutriVisionWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B3A59E6648D1CBB37B0DA4 /* NutriVisionWatchApp.swift */; };
+		9C24FB7F4DFEE2DB998C3962 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95050D8B7EACA0B0DAAE0B04 /* Assets.xcassets */; };
+		B5B50D3B0CD428703D7FFAA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FC94CF52DD25BDE181F05D5 /* Foundation.framework */; };
+		C0BDB4272AC877F8C4540DFC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1D538830EDF9FBEAE050F315 /* PrivacyInfo.xcprivacy */; };
+		CAF97192DAE64116A9985CF7 /* DailySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DF505EF6E2A67DE4BE176 /* DailySnapshot.swift */; };
+		EBAB9779CD9EAEC870E2104F /* WatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D4887D8AA097076D2B3326 /* WatchModel.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		254A37E03050351E0044A0FA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,12 +39,50 @@
 			remoteGlobalIDString = 254A37CF3050351C0044A0FA;
 			remoteInfo = NutriVision;
 		};
+		27091BD8BBBD8E7BB0EA383F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 254A37C83050351C0044A0FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 67C7D5BE58E9420B8E6B3CC6;
+			remoteInfo = NutriVisionWidgets;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8457DF4014AFFDC5115F82AF /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4E6EB05543382A0EA0B7FB43 /* NutriVisionWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0A6EC6B59C2E77090627CDAE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		129E163924CE2DF42DD4F3C0 /* FastingActivityAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FastingActivityAttributes.swift; path = NutriVision/Services/FastingActivityAttributes.swift; sourceTree = "<group>"; };
+		1D538830EDF9FBEAE050F315 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		254A37D03050351C0044A0FA /* NutriVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutriVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		254A37DF3050351E0044A0FA /* NutriVisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NutriVisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		254A37E93050351E0044A0FA /* NutriVisionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NutriVisionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		335B09B8940E1B83C814241D /* CalorieWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalorieWidget.swift; sourceTree = "<group>"; };
+		42B3A59E6648D1CBB37B0DA4 /* NutriVisionWatchApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NutriVisionWatchApp.swift; sourceTree = "<group>"; };
+		485DF505EF6E2A67DE4BE176 /* DailySnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DailySnapshot.swift; path = NutriVision/Services/DailySnapshot.swift; sourceTree = "<group>"; };
+		4A7DF3BC674219F9A7ADBE2C /* DailySnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DailySnapshot.swift; path = NutriVision/Services/DailySnapshot.swift; sourceTree = "<group>"; };
+		590EBD94EDECCB0DEEC4692A /* NutriIntents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NutriIntents.swift; path = NutriVision/Services/NutriIntents.swift; sourceTree = "<group>"; };
+		7FC94CF52DD25BDE181F05D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		8E19CFAD7A319A422A47BEB1 /* FastingLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FastingLiveActivity.swift; sourceTree = "<group>"; };
+		94FADA5BB2E99F952BE0C3A3 /* WatchContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
+		95050D8B7EACA0B0DAAE0B04 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A0D4887D8AA097076D2B3326 /* WatchModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchModel.swift; sourceTree = "<group>"; };
+		AAD07D2C7F4239ADC6CF322D /* NutriVisionWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutriVisionWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9BAB2DD47948592764C69E2 /* NutriVisionWidgetBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NutriVisionWidgetBundle.swift; sourceTree = "<group>"; };
+		CEDB1C7546C7F9B3F704BD55 /* NutriVisionWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NutriVisionWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE4BA15697EC33E5AE4B0C22 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -48,6 +104,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0D1D067DA20111BB952417BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5B50D3B0CD428703D7FFAA4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		254A37CD3050351C0044A0FA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -69,9 +133,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		50E866D9D082E36926E29A75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67141D738406781F87EDDBFB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042754E78B5D650673E1B2CE /* NutriVisionWatch */ = {
+			isa = PBXGroup;
+			children = (
+				42B3A59E6648D1CBB37B0DA4 /* NutriVisionWatchApp.swift */,
+				94FADA5BB2E99F952BE0C3A3 /* WatchContentView.swift */,
+				A0D4887D8AA097076D2B3326 /* WatchModel.swift */,
+				95050D8B7EACA0B0DAAE0B04 /* Assets.xcassets */,
+			);
+			path = NutriVisionWatch;
+			sourceTree = "<group>";
+		};
 		254A37C73050351C0044A0FA = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +162,13 @@
 				254A37E23050351E0044A0FA /* NutriVisionTests */,
 				254A37EC3050351E0044A0FA /* NutriVisionUITests */,
 				254A37D13050351C0044A0FA /* Products */,
+				BED66539E0C5D8F9B0879170 /* Frameworks */,
+				7BA0A3C6DEA8294359350A94 /* NutriVisionWidgets */,
+				485DF505EF6E2A67DE4BE176 /* DailySnapshot.swift */,
+				129E163924CE2DF42DD4F3C0 /* FastingActivityAttributes.swift */,
+				590EBD94EDECCB0DEEC4692A /* NutriIntents.swift */,
+				042754E78B5D650673E1B2CE /* NutriVisionWatch */,
+				4A7DF3BC674219F9A7ADBE2C /* DailySnapshot.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,8 +178,47 @@
 				254A37D03050351C0044A0FA /* NutriVision.app */,
 				254A37DF3050351E0044A0FA /* NutriVisionTests.xctest */,
 				254A37E93050351E0044A0FA /* NutriVisionUITests.xctest */,
+				CEDB1C7546C7F9B3F704BD55 /* NutriVisionWidgets.appex */,
+				AAD07D2C7F4239ADC6CF322D /* NutriVisionWatch.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		7BA0A3C6DEA8294359350A94 /* NutriVisionWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				335B09B8940E1B83C814241D /* CalorieWidget.swift */,
+				8E19CFAD7A319A422A47BEB1 /* FastingLiveActivity.swift */,
+				B9BAB2DD47948592764C69E2 /* NutriVisionWidgetBundle.swift */,
+				0A6EC6B59C2E77090627CDAE /* Info.plist */,
+				1D538830EDF9FBEAE050F315 /* PrivacyInfo.xcprivacy */,
+			);
+			path = NutriVisionWidgets;
+			sourceTree = "<group>";
+		};
+		BED66539E0C5D8F9B0879170 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C10A1CA79723DF4CEFDC5EFC /* iOS */,
+				F1E5B3348A7199C6973B5513 /* watchOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C10A1CA79723DF4CEFDC5EFC /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				EE4BA15697EC33E5AE4B0C22 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		F1E5B3348A7199C6973B5513 /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				7FC94CF52DD25BDE181F05D5 /* Foundation.framework */,
+			);
+			name = watchOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,17 +231,17 @@
 				254A37CC3050351C0044A0FA /* Sources */,
 				254A37CD3050351C0044A0FA /* Frameworks */,
 				254A37CE3050351C0044A0FA /* Resources */,
+				8457DF4014AFFDC5115F82AF /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A7E03923DCFED74F172E3A08 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				254A37D23050351C0044A0FA /* NutriVision */,
 			);
 			name = NutriVision;
-			packageProductDependencies = (
-			);
 			productName = NutriVision;
 			productReference = 254A37D03050351C0044A0FA /* NutriVision.app */;
 			productType = "com.apple.product-type.application";
@@ -134,8 +263,6 @@
 				254A37E23050351E0044A0FA /* NutriVisionTests */,
 			);
 			name = NutriVisionTests;
-			packageProductDependencies = (
-			);
 			productName = NutriVisionTests;
 			productReference = 254A37DF3050351E0044A0FA /* NutriVisionTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -157,11 +284,43 @@
 				254A37EC3050351E0044A0FA /* NutriVisionUITests */,
 			);
 			name = NutriVisionUITests;
-			packageProductDependencies = (
-			);
 			productName = NutriVisionUITests;
 			productReference = 254A37E93050351E0044A0FA /* NutriVisionUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		45C3E0A7D79C9F7FAD74EF08 /* NutriVisionWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60508BD26D8BFE7092F10467 /* Build configuration list for PBXNativeTarget "NutriVisionWatch" */;
+			buildPhases = (
+				7EE0DFDA0BB7996BE813F510 /* Sources */,
+				0D1D067DA20111BB952417BA /* Frameworks */,
+				FDB84579046C81B4D41341C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NutriVisionWatch;
+			productName = NutriVisionWatch;
+			productReference = AAD07D2C7F4239ADC6CF322D /* NutriVisionWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		67C7D5BE58E9420B8E6B3CC6 /* NutriVisionWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28DA7F0E00B5D3F1A0655FEC /* Build configuration list for PBXNativeTarget "NutriVisionWidgets" */;
+			buildPhases = (
+				7BC29CBE85DD71E8B97AE763 /* Sources */,
+				50E866D9D082E36926E29A75 /* Frameworks */,
+				57A0516F6E1DCE93B0DB2873 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NutriVisionWidgets;
+			productName = NutriVisionWidgets;
+			productReference = CEDB1C7546C7F9B3F704BD55 /* NutriVisionWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -191,6 +350,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				es,
 				Base,
 			);
 			mainGroup = 254A37C73050351C0044A0FA;
@@ -203,6 +363,8 @@
 				254A37CF3050351C0044A0FA /* NutriVision */,
 				254A37DE3050351E0044A0FA /* NutriVisionTests */,
 				254A37E83050351E0044A0FA /* NutriVisionUITests */,
+				67C7D5BE58E9420B8E6B3CC6 /* NutriVisionWidgets */,
+				45C3E0A7D79C9F7FAD74EF08 /* NutriVisionWatch */,
 			);
 		};
 /* End PBXProject section */
@@ -226,6 +388,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57A0516F6E1DCE93B0DB2873 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0BDB4272AC877F8C4540DFC /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDB84579046C81B4D41341C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C24FB7F4DFEE2DB998C3962 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +431,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7BC29CBE85DD71E8B97AE763 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				807D7B862E73E4BA20A752C7 /* CalorieWidget.swift in Sources */,
+				21EBE76E04C5FAC8B8CACC60 /* FastingLiveActivity.swift in Sources */,
+				3914CC8340F21266CFB0B5E6 /* NutriVisionWidgetBundle.swift in Sources */,
+				CAF97192DAE64116A9985CF7 /* DailySnapshot.swift in Sources */,
+				7EE1A33FAF8BA0B809C46969 /* FastingActivityAttributes.swift in Sources */,
+				21DD6BBD37DFF84C475E9A68 /* NutriIntents.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EE0DFDA0BB7996BE813F510 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C428CD80C66B148C134ED0D /* NutriVisionWatchApp.swift in Sources */,
+				1519F2170DB7906F6BA4EBC7 /* WatchContentView.swift in Sources */,
+				EBAB9779CD9EAEC870E2104F /* WatchModel.swift in Sources */,
+				32CFE9D2FAD9A601AC28BADF /* DailySnapshot.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +467,12 @@
 			isa = PBXTargetDependency;
 			target = 254A37CF3050351C0044A0FA /* NutriVision */;
 			targetProxy = 254A37EA3050351E0044A0FA /* PBXContainerItemProxy */;
+		};
+		A7E03923DCFED74F172E3A08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NutriVisionWidgets;
+			target = 67C7D5BE58E9420B8E6B3CC6 /* NutriVisionWidgets */;
+			targetProxy = 27091BD8BBBD8E7BB0EA383F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -393,6 +601,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Config/NutriVision.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -400,6 +609,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "NutriVision uses your camera to identify food and estimate its nutrition.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "NutriVision reads your weight, steps and active energy to personalise your goals.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "NutriVision saves the meals, water and weight you log to Apple Health.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -413,7 +625,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Janith-Kavinda.NutriVision";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -428,12 +640,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Config/NutriVision.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H2SGDST2MQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "NutriVision uses your camera to identify food and estimate its nutrition.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "NutriVision reads your weight, steps and active energy to personalise your goals.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "NutriVision saves the meals, water and weight you log to Apple Health.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -446,7 +662,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Janith-Kavinda.NutriVision";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -536,6 +752,120 @@
 			};
 			name = Release;
 		};
+		386584CC8A71EE113E0E4D3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = Config/NutriVisionWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2SGDST2MQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NutriVisionWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NutriVision;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Janith-Kavinda.NutriVision.Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		421B4AAAF695B4EE5F66F051 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = Config/NutriVisionWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2SGDST2MQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NutriVisionWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NutriVision;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Janith-Kavinda.NutriVision.Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		660E45E0EFB627E3B6FF110E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2SGDST2MQ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = NutriVision;
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Janith-Kavinda.NutriVision";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Janith-Kavinda.NutriVision.watchkitapp";
+				PRODUCT_NAME = NutriVisionWatch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		B83FA9CC7600EAD02DD8B3D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2SGDST2MQ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = NutriVision;
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Janith-Kavinda.NutriVision";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Janith-Kavinda.NutriVision.watchkitapp";
+				PRODUCT_NAME = NutriVisionWatch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -571,6 +901,24 @@
 			buildConfigurations = (
 				254A37FA3050351E0044A0FA /* Debug */,
 				254A37FB3050351E0044A0FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28DA7F0E00B5D3F1A0655FEC /* Build configuration list for PBXNativeTarget "NutriVisionWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				421B4AAAF695B4EE5F66F051 /* Release */,
+				386584CC8A71EE113E0E4D3A /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60508BD26D8BFE7092F10467 /* Build configuration list for PBXNativeTarget "NutriVisionWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B83FA9CC7600EAD02DD8B3D2 /* Release */,
+				660E45E0EFB627E3B6FF110E /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

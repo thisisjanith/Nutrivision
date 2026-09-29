@@ -10,13 +10,19 @@
 
 import Foundation
 
-struct NutritionProfile: Sendable, Equatable {
+nonisolated struct NutritionProfile: Sendable, Equatable {
     let displayName: String
     let calories: Double
     let proteinGrams: Double
     let carbsGrams: Double
     let fatGrams: Double
     let servingSize: String
+    // Micronutrients default to 0 ("unknown/none") so the hand-written
+    // classifier tables don't need to spell them out.
+    var fiberGrams: Double = 0
+    var sugarGrams: Double = 0
+    var sodiumMg: Double = 0
+    var saturatedFatGrams: Double = 0
 }
 
 /// Minimum classifier confidence required before a result is treated as a
@@ -78,7 +84,11 @@ enum FoodNutritionMap {
     /// "butternut squash" before "squash". The previous implementation walked
     /// the dictionary directly, whose order is unspecified and varies between
     /// launches, so an ambiguous label could map to a different food each run.
-    private static let keysBySpecificity: [String] = profiles.keys.sorted {
+    /// ImageNet entries plus the 101 Food-101 classes; ImageNet wins on ties.
+    private static let allProfiles: [String: NutritionProfile] =
+        profiles.merging(Food101Nutrition.profiles) { imageNet, _ in imageNet }
+
+    private static let keysBySpecificity: [String] = allProfiles.keys.sorted {
         $0.count != $1.count ? $0.count > $1.count : $0 < $1
     }
 
@@ -96,12 +106,12 @@ enum FoodNutritionMap {
             .filter { !$0.isEmpty }
 
         for synonym in synonyms {
-            if let exact = profiles[synonym] { return exact }
+            if let exact = allProfiles[synonym] { return exact }
         }
 
         for key in keysBySpecificity {
             for synonym in synonyms where synonym.containsWordSequence(key) {
-                return profiles[key]
+                return allProfiles[key]
             }
         }
 

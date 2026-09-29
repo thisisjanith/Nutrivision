@@ -8,24 +8,15 @@ import SwiftData
 
 @main
 struct NutriVisionApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            MealEntry.self,
-            CachedEstimate.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    init() {
+        DiagnosticsSubscriber.shared.start()
+        WatchBridge.shared.activate()
+    }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(PersistenceController.shared)
     }
 }

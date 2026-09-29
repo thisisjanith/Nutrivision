@@ -6,29 +6,22 @@
 import Foundation
 import Observation
 
+@MainActor
 @Observable
 final class DashboardViewModel {
-    private enum DefaultsKey {
-        static let userName = "nutrivision.userName"
-        static let calorieGoal = "nutrivision.calorieGoal"
-    }
+    private let profileStore: ProfileStore
 
-    private let defaults: UserDefaults
+    init(profileStore: ProfileStore? = nil) {
+        self.profileStore = profileStore ?? .shared
+    }
 
     var userName: String {
-        didSet { defaults.set(userName, forKey: DefaultsKey.userName) }
+        let name = profileStore.profile.name.trimmingCharacters(in: .whitespaces)
+        return name.isEmpty ? "there" : name
     }
 
-    var calorieGoal: Double {
-        didSet { defaults.set(calorieGoal, forKey: DefaultsKey.calorieGoal) }
-    }
-
-    init(defaults: UserDefaults = .standard) {
-        self.defaults = defaults
-        self.userName = defaults.string(forKey: DefaultsKey.userName) ?? "there"
-        let storedGoal = defaults.double(forKey: DefaultsKey.calorieGoal)
-        self.calorieGoal = storedGoal > 0 ? storedGoal : 1800
-    }
+    var goals: MacroGoals { profileStore.goals }
+    var calorieGoal: Double { goals.calories }
 
     var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
@@ -62,5 +55,13 @@ final class DashboardViewModel {
     func goalProgress(consumed: Double) -> Double {
         guard calorieGoal > 0 else { return 0 }
         return min(max(consumed / calorieGoal, 0), 1)
+    }
+
+    /// Meals grouped by meal type in day order, skipping empty groups.
+    func groupedByMealType(_ meals: [MealEntry]) -> [(type: MealType, meals: [MealEntry])] {
+        MealType.allCases.compactMap { type in
+            let group = meals.filter { $0.mealType == type }
+            return group.isEmpty ? nil : (type, group)
+        }
     }
 }

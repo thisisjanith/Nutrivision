@@ -12,9 +12,17 @@ struct MacroRingView: View {
     var carbsGrams: Double
     var fatGrams: Double
     var totalCalories: Double
+    /// When set, each ring fills toward its daily goal instead of toward the
+    /// largest macro.
+    var goals: MacroGoals?
 
     private var maxValue: Double {
         max(proteinGrams, carbsGrams, fatGrams, 1)
+    }
+
+    private func progress(_ grams: Double, goal: Double?) -> Double {
+        if let goal, goal > 0 { return grams / goal }
+        return grams / maxValue
     }
 
     var body: some View {
@@ -24,11 +32,11 @@ struct MacroRingView: View {
             let spacing = side * 0.03
 
             ZStack {
-                ring(progress: proteinGrams / maxValue, color: .macroProtein, lineWidth: lineWidth)
+                ring(progress: progress(proteinGrams, goal: goals?.protein), color: .macroProtein, lineWidth: lineWidth)
                     .padding(0)
-                ring(progress: carbsGrams / maxValue, color: .macroCarbs, lineWidth: lineWidth)
+                ring(progress: progress(carbsGrams, goal: goals?.carbs), color: .macroCarbs, lineWidth: lineWidth)
                     .padding(lineWidth + spacing)
-                ring(progress: fatGrams / maxValue, color: .macroFat, lineWidth: lineWidth)
+                ring(progress: progress(fatGrams, goal: goals?.fat), color: .macroFat, lineWidth: lineWidth)
                     .padding((lineWidth + spacing) * 2)
 
                 VStack(spacing: 2) {
@@ -55,6 +63,7 @@ struct MacroRingView: View {
         .animation(.spring(response: 0.6, dampingFraction: 0.8), value: fatGrams)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(Int(totalCalories.rounded())) kilocalories today")
+        .accessibilityValue("Protein \(Int(proteinGrams.rounded())) grams, carbs \(Int(carbsGrams.rounded())) grams, fat \(Int(fatGrams.rounded())) grams")
     }
 
     private func ring(progress: Double, color: Color, lineWidth: CGFloat) -> some View {

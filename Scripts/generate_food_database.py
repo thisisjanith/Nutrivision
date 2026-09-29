@@ -1,0 +1,167 @@
+#!/usr/bin/env python3
+"""Generates NutriVision/Resources/FoodDatabase.json.
+
+Values are per 100 g and follow typical USDA FoodData Central (SR Legacy /
+Foundation) figures, rounded. This is a curated starter subset of common
+foods; extend TABLE (or replace it with a real FDC export) and re-run.
+
+    python3 Scripts/generate_food_database.py
+"""
+import json, pathlib
+
+# name, kcal, protein, carbs, fat, fiber, sugar, sodium_mg, sat_fat, servings[(label, grams)], aliases
+T = [
+ # Fruit
+ ("Apple", 52,0.3,14,0.2,2.4,10.4,1,0.03,[("1 medium",182),("1 small",149),("1 cup sliced",109)],"apples"),
+ ("Banana", 89,1.1,23,0.3,2.6,12.2,1,0.1,[("1 medium",118),("1 large",136),("1 cup sliced",150)],"bananas"),
+ ("Orange", 47,0.9,12,0.1,2.4,9.4,0,0.02,[("1 medium",131),("1 large",184)],"oranges"),
+ ("Strawberries", 32,0.7,7.7,0.3,2,4.9,1,0.02,[("1 cup",152),("1 medium",12)],"strawberry"),
+ ("Blueberries", 57,0.7,14.5,0.3,2.4,10,1,0.03,[("1 cup",148),("1/2 cup",74)],"blueberry"),
+ ("Grapes", 69,0.7,18,0.2,0.9,15.5,2,0.05,[("1 cup",151),("10 grapes",49)],"grape"),
+ ("Watermelon", 30,0.6,7.6,0.2,0.4,6.2,1,0.02,[("1 cup diced",152),("1 wedge",286)],""),
+ ("Pineapple", 50,0.5,13,0.1,1.4,9.9,1,0.01,[("1 cup chunks",165),("1 slice",84)],""),
+ ("Mango", 60,0.8,15,0.4,1.6,13.7,1,0.09,[("1 cup sliced",165),("1 fruit",336)],""),
+ ("Avocado", 160,2,8.5,14.7,6.7,0.7,7,2.1,[("1/2 fruit",100),("1 fruit",201)],"guacamole base"),
+ ("Peach", 39,0.9,9.5,0.3,1.5,8.4,0,0.02,[("1 medium",150)],""),
+ ("Pear", 57,0.4,15,0.1,3.1,9.8,1,0.01,[("1 medium",178)],""),
+ ("Kiwi", 61,1.1,15,0.5,3,9,3,0.03,[("1 fruit",69)],""),
+ ("Raisins", 299,3.1,79,0.5,3.7,59,11,0.14,[("1 small box",43),("1/4 cup",40)],""),
+ ("Dates", 282,2.5,75,0.4,8,63,2,0.03,[("1 date",24)],"medjool"),
+ # Vegetables
+ ("Broccoli", 34,2.8,6.6,0.4,2.6,1.7,33,0.04,[("1 cup chopped",91),("1 stalk",151)],""),
+ ("Carrot", 41,0.9,9.6,0.2,2.8,4.7,69,0.04,[("1 medium",61),("1 cup chopped",128)],"carrots"),
+ ("Spinach", 23,2.9,3.6,0.4,2.2,0.4,79,0.06,[("1 cup raw",30),("1 cup cooked",180)],""),
+ ("Tomato", 18,0.9,3.9,0.2,1.2,2.6,5,0.03,[("1 medium",123),("1 cup chopped",180)],"tomatoes"),
+ ("Cucumber", 15,0.7,3.6,0.1,0.5,1.7,2,0.04,[("1 cup sliced",104),("1 medium",301)],""),
+ ("Lettuce", 15,1.4,2.9,0.2,1.3,0.8,28,0.02,[("1 cup shredded",47)],"romaine salad greens"),
+ ("Bell Pepper", 31,1,6,0.3,2.1,4.2,4,0.03,[("1 medium",119),("1 cup chopped",149)],"capsicum"),
+ ("Onion", 40,1.1,9.3,0.1,1.7,4.2,4,0.04,[("1 medium",110),("1/2 cup chopped",80)],""),
+ ("Potato (baked)", 93,2.5,21,0.1,2.2,1.2,10,0.03,[("1 medium",173),("1 large",299)],"baked potato"),
+ ("Sweet Potato (baked)", 90,2,21,0.2,3.3,6.5,36,0.05,[("1 medium",114),("1 large",180)],""),
+ ("Corn", 96,3.4,21,1.5,2.4,4.5,15,0.2,[("1 ear",90),("1/2 cup kernels",82)],"sweetcorn"),
+ ("Green Peas", 81,5.4,14,0.4,5.7,5.7,5,0.07,[("1/2 cup",80)],""),
+ ("Mushrooms", 22,3.1,3.3,0.3,1,2,5,0.05,[("1 cup sliced",70)],"mushroom"),
+ ("Cauliflower", 25,1.9,5,0.3,2,1.9,30,0.13,[("1 cup chopped",107)],""),
+ ("Zucchini", 17,1.2,3.1,0.3,1,2.5,8,0.08,[("1 medium",196),("1 cup sliced",113)],"courgette"),
+ ("Cabbage", 25,1.3,5.8,0.1,2.5,3.2,18,0.03,[("1 cup shredded",70)],""),
+ # Grains / bread
+ ("White Rice (cooked)", 130,2.7,28,0.3,0.4,0.1,1,0.08,[("1 cup",158),("1/2 cup",79)],"rice steamed"),
+ ("Brown Rice (cooked)", 123,2.7,26,1,1.6,0.2,4,0.2,[("1 cup",195),("1/2 cup",98)],""),
+ ("Pasta (cooked)", 158,5.8,31,0.9,1.8,0.6,1,0.18,[("1 cup",140),("2 oz dry",56)],"spaghetti noodles macaroni"),
+ ("Oatmeal (cooked)", 71,2.5,12,1.5,1.7,0.3,49,0.26,[("1 cup",234),("1/2 cup",117)],"porridge oats"),
+ ("Rolled Oats (dry)", 379,13,68,6.5,10,1,6,1.2,[("1/2 cup",40),("1/4 cup",20)],"oats"),
+ ("White Bread", 265,9,49,3.2,2.7,5,491,0.7,[("1 slice",30)],"toast"),
+ ("Whole Wheat Bread", 252,12.5,43,3.5,6,6,450,0.7,[("1 slice",32)],"brown bread"),
+ ("Bagel", 257,10,50,1.6,2.1,6,439,0.3,[("1 medium",105)],""),
+ ("Tortilla (flour)", 304,8,50,7.6,2.7,3,700,2.2,[("1 medium",49),("1 large",72)],"wrap"),
+ ("Quinoa (cooked)", 120,4.4,21,1.9,2.8,0.9,7,0.23,[("1 cup",185)],""),
+ ("Cornflakes", 357,7.5,84,0.4,3.3,10,730,0.1,[("1 cup",28)],"cereal"),
+ ("Granola", 471,10,64,20,7,24,26,3.7,[("1/2 cup",56)],"muesli"),
+ ("Pancake", 227,6.4,28,10,1.2,5,439,2.1,[("1 medium",38),("2 medium",76)],"pancakes"),
+ ("Croissant", 406,8.2,46,21,2.6,11,400,12,[("1 medium",57)],""),
+ # Protein
+ ("Chicken Breast (cooked)", 165,31,0,3.6,0,0,74,1,[("1 breast",172),("3 oz",85),("100 g",100)],"grilled chicken"),
+ ("Chicken Thigh (cooked)", 209,26,0,10.9,0,0,84,3,[("1 thigh",116)],""),
+ ("Beef Steak (cooked)", 271,26,0,18,0,0,55,7.5,[("6 oz",170),("3 oz",85)],"sirloin"),
+ ("Ground Beef (cooked)", 250,26,0,15,0,0,72,6,[("3 oz",85),("1 patty",113)],"mince hamburger patty"),
+ ("Pork Chop (cooked)", 231,26,0,14,0,0,60,5,[("1 chop",145)],""),
+ ("Bacon (cooked)", 541,37,1.4,42,0,0,1717,14,[("1 slice",8),("3 slices",24)],""),
+ ("Ham", 145,21,1.5,5.5,0,0.5,1203,1.8,[("2 slices",56)],""),
+ ("Turkey Breast", 135,30,0,1,0,0,55,0.3,[("3 oz",85)],""),
+ ("Salmon (cooked)", 206,22,0,12,0,0,61,2.5,[("1 fillet",154),("3 oz",85)],""),
+ ("Tuna (canned)", 116,26,0,0.8,0,0,247,0.2,[("1 can",142),("3 oz",85)],""),
+ ("Shrimp (cooked)", 99,24,0.2,0.3,0,0,111,0.1,[("3 oz",85),("6 large",42)],"prawns"),
+ ("Cod (cooked)", 105,23,0,0.9,0,0,78,0.2,[("1 fillet",180)],"white fish"),
+ ("Egg", 143,12.6,0.7,9.5,0,0.4,142,3.1,[("1 large",50),("2 large",100)],"eggs boiled fried"),
+ ("Egg White", 52,11,0.7,0.2,0,0.7,166,0,[("1 large",33)],""),
+ ("Tofu", 76,8,1.9,4.8,0.3,0.6,7,0.7,[("1/2 cup",126),("3 oz",85)],""),
+ ("Lentils (cooked)", 116,9,20,0.4,7.9,1.8,2,0.05,[("1 cup",198),("1/2 cup",99)],"dal"),
+ ("Chickpeas (cooked)", 164,8.9,27,2.6,7.6,4.8,7,0.27,[("1 cup",164),("1/2 cup",82)],"garbanzo"),
+ ("Black Beans (cooked)", 132,8.9,24,0.5,8.7,0.3,1,0.1,[("1 cup",172),("1/2 cup",86)],""),
+ ("Kidney Beans (cooked)", 127,8.7,23,0.5,6.4,0.3,2,0.07,[("1 cup",177)],""),
+ ("Hummus", 166,8,14,10,6,0.3,379,1.4,[("2 tbsp",30),("1/4 cup",62)],""),
+ # Dairy
+ ("Milk (whole)", 61,3.2,4.8,3.3,0,5.1,43,1.9,[("1 cup",244),("1 glass",244)],""),
+ ("Milk (skim)", 34,3.4,5,0.1,0,5,42,0.1,[("1 cup",245)],"nonfat"),
+ ("Yogurt (plain)", 61,3.5,4.7,3.3,0,4.7,46,2.1,[("1 cup",245),("1 container",170)],"yoghurt curd"),
+ ("Greek Yogurt (plain)", 59,10,3.6,0.4,0,3.2,36,0.1,[("1 cup",245),("1 container",170)],""),
+ ("Cheddar Cheese", 403,25,1.3,33,0,0.5,653,21,[("1 slice",28),("1 oz",28)],"cheese"),
+ ("Mozzarella", 280,28,3.1,17,0,1,627,10,[("1 oz",28),("1/2 cup shredded",56)],""),
+ ("Cottage Cheese", 98,11,3.4,4.3,0,2.7,364,1.7,[("1/2 cup",113)],""),
+ ("Butter", 717,0.9,0.1,81,0,0.1,11,51,[("1 tbsp",14),("1 tsp",5)],""),
+ ("Cream Cheese", 342,6,4,34,0,3.2,321,19,[("1 tbsp",14),("2 tbsp",29)],""),
+ ("Ice Cream (vanilla)", 207,3.5,24,11,0.7,21,80,6.8,[("1/2 cup",66),("1 cup",132)],""),
+ ("Soy Milk", 33,2.9,1.7,1.6,0.4,0.6,51,0.2,[("1 cup",243)],""),
+ ("Almond Milk (unsweetened)", 15,0.6,0.3,1.2,0.3,0,72,0.1,[("1 cup",240)],""),
+ # Nuts / fats
+ ("Almonds", 579,21,22,50,12.5,4.4,1,3.8,[("1 oz",28),("1/4 cup",36)],""),
+ ("Peanuts", 567,26,16,49,8.5,4.7,18,6.8,[("1 oz",28),("1/4 cup",37)],""),
+ ("Peanut Butter", 588,25,20,50,6,9,426,10,[("2 tbsp",32),("1 tbsp",16)],""),
+ ("Walnuts", 654,15,14,65,6.7,2.6,2,6.1,[("1 oz",28),("1/4 cup",30)],""),
+ ("Cashews", 553,18,30,44,3.3,6,12,7.8,[("1 oz",28)],""),
+ ("Olive Oil", 884,0,0,100,0,0,2,13.8,[("1 tbsp",13.5),("1 tsp",4.5)],""),
+ ("Vegetable Oil", 884,0,0,100,0,0,0,7,[("1 tbsp",14)],"canola sunflower"),
+ ("Mayonnaise", 680,1,0.6,75,0,0.6,635,11,[("1 tbsp",14)],""),
+ ("Chia Seeds", 486,17,42,31,34,0,16,3.3,[("1 tbsp",12),("1 oz",28)],""),
+ # Snacks / sweets
+ ("Potato Chips", 536,7,53,35,4.4,0.3,525,3.1,[("1 small bag",28),("1 oz",28)],"crisps"),
+ ("Popcorn (air-popped)", 387,13,78,4.5,15,0.9,8,0.6,[("3 cups",24)],""),
+ ("Chocolate (milk)", 535,7.7,59,30,3.4,52,79,18.5,[("1 bar",43),("1 oz",28)],""),
+ ("Dark Chocolate", 598,7.8,46,43,11,24,20,24,[("1 oz",28),("2 squares",20)],""),
+ ("Cookie (chocolate chip)", 488,5,64,24,2.5,34,370,10,[("1 cookie",30)],"biscuit"),
+ ("Donut", 421,4.9,51,22,1.4,23,326,5,[("1 medium",60)],"doughnut"),
+ ("Sugar", 387,0,100,0,0,100,1,0,[("1 tsp",4),("1 tbsp",12.5)],""),
+ ("Honey", 304,0.3,82,0,0.2,82,4,0,[("1 tbsp",21),("1 tsp",7)],""),
+ ("Jam", 250,0.4,64,0.1,1,49,32,0,[("1 tbsp",20)],"jelly"),
+ ("Protein Bar", 380,30,38,12,6,20,200,5,[("1 bar",60)],""),
+ # Meals / fast food
+ ("Pizza (cheese)", 266,11,33,10,2.3,3.6,598,4.5,[("1 slice",107),("2 slices",214)],""),
+ ("Cheeseburger", 295,15,30,14,1.3,6,530,6,[("1 burger",119),("1 large",180)],"burger"),
+ ("Hot Dog", 290,10,4,26,0,2,1100,9.5,[("1 hot dog with bun",98)],""),
+ ("French Fries", 312,3.4,41,15,3.8,0.3,210,2.3,[("small serving",71),("medium serving",117)],"chips fries"),
+ ("Fried Chicken", 246,19,10,14,0.5,0,650,3.7,[("1 piece",100),("1 drumstick",70)],""),
+ ("Chicken Sandwich", 240,15,26,8,1.5,4,520,1.8,[("1 sandwich",180)],""),
+ ("Burrito", 206,8,27,7,3,2,520,2.9,[("1 burrito",250)],""),
+ ("Taco", 226,9.7,20,12,3.5,1,397,4.4,[("1 taco",78)],""),
+ ("Sushi Roll", 145,5,28,0.7,1,5,428,0.1,[("6 pieces",150)],"maki"),
+ ("Fried Rice", 163,4.5,25,5,1,0.8,470,1,[("1 cup",198)],""),
+ ("Mac and Cheese", 164,6.7,20,6.7,1,3,450,3.5,[("1 cup",200)],"macaroni cheese"),
+ ("Lasagna", 135,8,13,5.7,1.1,3.4,346,2.9,[("1 piece",250)],""),
+ ("Caesar Salad", 127,5,6,10,1.6,1.5,320,2.4,[("1 bowl",200)],""),
+ ("Chicken Curry", 130,10,6,7.5,1,3,350,2.4,[("1 cup",240)],""),
+ ("Chili", 105,8,10,4,3,2.5,420,1.6,[("1 cup",250)],""),
+ ("Vegetable Soup", 40,1.5,7,0.6,1.4,2.4,300,0.1,[("1 cup",245),("1 bowl",350)],""),
+ ("Chicken Noodle Soup", 45,3.3,5.5,1.2,0.4,0.8,340,0.3,[("1 cup",248)],""),
+ ("Omelette", 154,10,0.6,12,0,0.6,240,3.6,[("2-egg omelette",120)],""),
+ ("Scrambled Eggs", 149,10,1.6,11,0,1.4,145,3.3,[("2 eggs",122)],""),
+ ("Sandwich (turkey)", 175,12,20,5,1.5,3,560,1.3,[("1 sandwich",200)],""),
+ ("Grilled Cheese", 330,13,28,19,1,4,700,9,[("1 sandwich",120)],""),
+ # Drinks
+ ("Coffee (black)", 1,0.1,0,0,0,0,2,0,[("1 cup",240)],"americano"),
+ ("Latte", 54,3.5,5,2.2,0,5,45,1.4,[("1 medium (16 oz)",473),("1 small (12 oz)",355)],"cappuccino"),
+ ("Tea (unsweetened)", 1,0,0.3,0,0,0,3,0,[("1 cup",240)],""),
+ ("Orange Juice", 45,0.7,10.4,0.2,0.2,8.4,1,0.02,[("1 cup",248),("1 glass",248)],""),
+ ("Apple Juice", 46,0.1,11.4,0.1,0.2,9.6,4,0.02,[("1 cup",248)],""),
+ ("Cola", 42,0,10.6,0,0,10.6,4,0,[("1 can",355),("1 bottle",500)],"soda coke pepsi"),
+ ("Beer", 43,0.5,3.6,0,0,0,4,0,[("1 bottle",355),("1 pint",473)],"lager"),
+ ("Red Wine", 85,0.1,2.6,0,0,0.6,4,0,[("1 glass",150)],"wine"),
+ ("Sports Drink", 26,0,6.4,0,0,5.8,41,0,[("1 bottle",591)],"gatorade"),
+ ("Protein Shake", 90,16,5,1.5,1,3,100,0.5,[("1 scoop with water",300)],"whey"),
+ ("Smoothie (fruit)", 65,0.9,15,0.3,1.3,12,5,0.05,[("1 cup",245),("1 large",473)],""),
+ # Condiments
+ ("Ketchup", 101,1,27,0.1,0.3,22,907,0,[("1 tbsp",17)],""),
+ ("Soy Sauce", 53,8,5,0.6,0.8,0.4,5493,0.1,[("1 tbsp",16)],""),
+ ("Ranch Dressing", 430,1,6,45,0,4,1000,7,[("2 tbsp",30)],"salad dressing"),
+]
+
+out = []
+for (name, kcal, p, c, f, fiber, sugar, sodium, sat, servings, aliases) in T:
+    out.append({
+        "name": name, "kcal": kcal, "protein": p, "carbs": c, "fat": f,
+        "fiber": fiber, "sugar": sugar, "sodium_mg": sodium, "sat_fat": sat,
+        "servings": [{"label": l, "grams": g} for l, g in servings],
+        "aliases": aliases,
+    })
+path = pathlib.Path(__file__).resolve().parent.parent / "NutriVision" / "Resources" / "FoodDatabase.json"
+path.write_text(json.dumps(out, indent=1))
+print(f"wrote {len(out)} foods to {path}")

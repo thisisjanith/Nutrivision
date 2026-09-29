@@ -93,10 +93,17 @@ struct ScannerView: View {
         HStack {
             circularButton(systemImage: "xmark", action: onClose)
             Spacer()
-            circularButton(
-                systemImage: viewModel.inputMode == .liveCamera ? "photo.on.rectangle" : "camera",
-                action: toggleInputMode
-            )
+            HStack(spacing: Theme.Spacing.sm) {
+                if viewModel.inputMode == .liveCamera, viewModel.hasTorch, viewModel.cameraAuthorized {
+                    circularButton(systemImage: viewModel.torchOn ? "flashlight.on.fill" : "flashlight.off.fill") {
+                        viewModel.toggleTorch()
+                    }
+                }
+                circularButton(
+                    systemImage: viewModel.inputMode == .liveCamera ? "photo.on.rectangle" : "camera",
+                    action: toggleInputMode
+                )
+            }
         }
         .padding(.horizontal, Theme.Spacing.md)
         .padding(.top, Theme.Spacing.sm)
@@ -110,7 +117,16 @@ struct ScannerView: View {
                 .frame(width: 40, height: 40)
                 .background(.black.opacity(0.4), in: Circle())
         }
-        .accessibilityLabel(systemImage == "xmark" ? "Close" : "Switch input")
+        .accessibilityLabel(accessibilityName(for: systemImage))
+    }
+
+    private func accessibilityName(for systemImage: String) -> String {
+        switch systemImage {
+        case "xmark": "Close"
+        case "flashlight.on.fill": "Turn torch off"
+        case "flashlight.off.fill": "Turn torch on"
+        default: "Switch input"
+        }
     }
 
     private func toggleInputMode() {
@@ -379,15 +395,27 @@ struct ScannerView: View {
     }
 
     private func permissionMessage(_ message: String) -> some View {
-        VStack(spacing: Theme.Spacing.sm) {
+        VStack(spacing: Theme.Spacing.md) {
             Image(systemName: "camera.fill")
                 .font(.largeTitle)
+            Text("Camera access needed")
+                .font(.headline)
             Text(message)
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
+                .foregroundStyle(.white.opacity(0.8))
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Color.brandPrimary)
+            Button("Choose a photo instead") { toggleInputMode() }
+                .font(.subheadline)
+                .foregroundStyle(.white.opacity(0.8))
         }
         .foregroundStyle(.white)
         .padding(Theme.Spacing.lg)
+        .accessibilityElement(children: .contain)
     }
 }
 
