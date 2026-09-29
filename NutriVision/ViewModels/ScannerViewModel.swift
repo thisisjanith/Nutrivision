@@ -6,6 +6,7 @@
 @preconcurrency import AVFoundation
 import UIKit
 import Observation
+import SwiftData
 
 /// One ranked guess from the classifier, with nutrition attached if we can
 /// map it.
@@ -30,6 +31,11 @@ struct DetectedFood: Identifiable, Equatable {
     let id = UUID()
     let candidate: FoodCandidate
     let alternatives: [FoodCandidate]
+    /// User's slider override, applied on top of the model's portion guess.
+    var portionScale: Double = 1
+    /// Set when the reading came from the cloud model (or its local cache).
+    var estimate: CloudFoodEstimate?
+    var fromCache = false
 
     var rawLabel: String { candidate.rawLabel }
     var confidence: Float { candidate.confidence }
@@ -40,11 +46,45 @@ struct DetectedFood: Identifiable, Equatable {
     var isLowConfidence: Bool { candidate.confidence < lowConfidenceThreshold }
 
     static let barcodeLabelPrefix = "barcode:"
+    static let labelPrefix = "label:"
+    static let cloudPrefix = "cloud:"
 
     /// True for a packaged-product reading from a barcode rather than a
     /// classifier guess. Barcode matches are exact, so the UI skips the
     /// confidence percentage and the "not quite right?" alternatives.
     var isBarcodeScan: Bool { rawLabel.hasPrefix(Self.barcodeLabelPrefix) }
+
+    /// Nutrition read straight off a printed label.
+    var isLabelScan: Bool { rawLabel.hasPrefix(Self.labelPrefix) }
+    var isCloudEstimate: Bool { rawLabel.hasPrefix(Self.cloudPrefix) }
+    /// Exact readings skip the confidence percentage and alternatives.
+    var isExact: Bool { isBarcodeScan || isLabelScan }
+    /// Anything derived from a model guess rather than a printed source.
+    var isEstimated: Bool { !isExact }
+
+    /// Nutrition after the user's portion override.
+    var scaledNutrition: NutritionProfile? { nutrition?.scaled(by: portionScale) }
+
+    static func label(_ nutrition: NutritionProfile) -> DetectedFood {
+        DetectedFood(
+            candidate: FoodCandidate(rawLabel: labelPrefix + nutrition.displayName, confidence: 1.0, nutrition: nutrition),
+            alternatives: []
+        )
+    }
+
+    static func cloud(_ estimate: CloudFoodEstimate, fromCache: Bool) -> DetectedFood {
+        var food = DetectedFood(
+            candidate: FoodCandidate(
+                rawLabel: cloudPrefix + estimate.foodName,
+                confidence: Float(estimate.confidenceScore),
+                nutrition: estimate.nutritionProfile
+            ),
+            alternatives: []
+        )
+        food.estimate = estimate
+        food.fromCache = fromCache
+        return food
+    }
 
     static func barcode(_ code: String, nutrition: NutritionProfile) -> DetectedFood {
         DetectedFood(
@@ -62,7 +102,9 @@ struct DetectedFood: Identifiable, Equatable {
     func selecting(_ replacement: FoodCandidate) -> DetectedFood {
         var rest = alternatives.filter { $0.id != replacement.id }
         rest.insert(candidate, at: 0)
-        return DetectedFood(candidate: replacement, alternatives: rest)
+        var updated = DetectedFood(candidate: replacement, alternatives: rest)
+        updated.portionScale = portionScale
+        return updated
     }
 
     static func == (lhs: DetectedFood, rhs: DetectedFood) -> Bool { lhs.id == rhs.id }
@@ -85,6 +127,17 @@ final class ScannerViewModel {
     var isLookingUpBarcode = false
     /// Transient feedback for a barcode that was read but couldn't be priced.
     var barcodeMessage: String?
+    /// Locked viewfinder box (Level 1), nil until the detector stabilises.
+    var region: FoodRegion?
+    /// Pixel size of the frame `region` refers to, for mapping into the view.
+    var frameSize = CGSize(width: 9, height: 16)
+    /// Bumped on each lock-on so the view can fire a haptic.
+    var lockCount = 0
+    var isAnalyzing = false
+    var statusMessage: String?
+    /// Camera-to-subject distance when the device has LiDAR.
+    var distanceMeters: Double? { depthSampler.distanceMeters }
+    var hasCapturableFrame: Bool { latestFrame != nil }
 
     private let videoOutput = AVCaptureVideoDataOutput()
     private let classifier = ClassifierService()
@@ -94,14 +147,33 @@ final class ScannerViewModel {
     private var isSessionConfigured = false
     private let productLookup: any ProductLookup
     private var barcodeScanner: BarcodeScanner?
+    private let depthSampler = DepthSampler()
+    private let regionDetector: any FoodRegionDetector
+    private let visionClient: (any VisionLLMClient)?
+    private var cache: EstimateCache?
+    private var latestFrame: SendablePixelBuffer?
+    private var regionStabilizer = DetectionStabilizer(windowSize: 4, requiredAgreement: 3)
+    private var boxSmoother = BoxSmoother()
+    private var missedFrames = 0
     private var lastBarcodeAttempt: (code: String, date: Date)?
 
     /// The scanner sees the same barcode every frame while it's in view; a
     /// repeat inside this window is ignored so we don't hammer the network.
     private let barcodeRetryInterval: TimeInterval = 5
 
-    init(productLookup: any ProductLookup = OpenFoodFactsClient()) {
+    init(
+        productLookup: any ProductLookup = FallbackProductLookup(sources: [OpenFoodFactsClient(), USDAClient()]),
+        regionDetector: any FoodRegionDetector = FoodRegionDetectorFactory.makeDefault(),
+        visionClient: (any VisionLLMClient)? = ProxyVisionClient.makeDefault()
+    ) {
         self.productLookup = productLookup
+        self.regionDetector = regionDetector
+        self.visionClient = visionClient
+    }
+
+    /// Gives the view model the SwiftData context backing the estimate cache.
+    func attach(modelContext: ModelContext) {
+        if cache == nil { cache = EstimateCache(context: modelContext) }
     }
 
     /// Floor on the gap between inferences. The sampler also refuses to
@@ -164,17 +236,72 @@ final class ScannerViewModel {
     }
 
     func classifyPickedImage(_ image: UIImage) async {
-        isClassifying = true
-        defer { isClassifying = false }
+        await analyze(image: image, distance: nil)
+    }
+
+    /// Shutter: freezes the current frame and identifies it.
+    func captureAndAnalyze() async {
+        guard let frame = latestFrame, let image = FrameCapture.image(from: frame) else { return }
+        await analyze(image: image, distance: distanceMeters)
+    }
+
+    /// Reads a printed Nutrition Facts panel from the current frame.
+    func scanLabel() async {
+        guard let frame = latestFrame, let image = FrameCapture.image(from: frame), !isAnalyzing else { return }
+        isAnalyzing = true
+        statusMessage = "Reading label…"
+        defer { isAnalyzing = false }
+        let profile = await Task.detached { try? LabelScanner.scan(image: image) }.value
+        if let profile {
+            statusMessage = nil
+            region = nil
+            detection = .label(profile)
+        } else {
+            statusMessage = "Couldn't read a nutrition label. Hold the panel flat and fill the frame."
+        }
+    }
+
+    /// Cache → cloud → on-device classifier. Each step is skipped or falls
+    /// through on failure so a scan always ends in *some* reading.
+    private func analyze(image: UIImage, distance: Double?) async {
+        guard !isAnalyzing else { return }
+        isAnalyzing = true
+        statusMessage = nil
+        defer { isAnalyzing = false }
+
+        if let cached = cache?.lookup(image: image) {
+            region = nil
+            detection = .cloud(cached, fromCache: true)
+            return
+        }
+
+        if let visionClient, let jpeg = FrameCapture.jpeg(from: image) {
+            do {
+                let estimate = try await visionClient.estimate(jpeg: jpeg, context: EstimateContext(distanceMeters: distance))
+                cache?.store(estimate, image: image)
+                region = nil
+                detection = .cloud(estimate, fromCache: false)
+                return
+            } catch {
+                statusMessage = "Cloud estimate unavailable — using on-device recognition."
+            }
+        }
+
         guard let results = try? await classifier.classify(image: image) else { return }
         // A still image has no temporal noise to smooth, so it's published
         // directly rather than through the stabilizer.
+        region = nil
         publish(results)
     }
 
     private func clearDetection() {
         detection = nil
         barcodeMessage = nil
+        statusMessage = nil
+        region = nil
+        regionStabilizer.reset()
+        boxSmoother.reset()
+        missedFrames = 0
         stabilizer.reset()
         frameSampler?.reset()
     }
@@ -206,14 +333,17 @@ final class ScannerViewModel {
 
         let session = self.session
         let videoOutput = self.videoOutput
+        let depthOutput: AVCaptureDepthDataOutput? = depthSampler.output
 
         sessionQueue.async {
             session.beginConfiguration()
             session.sessionPreset = .high
 
-            if let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
-               let input = try? AVCaptureDeviceInput(device: device),
-               session.canAddInput(input) {
+            // Prefer the LiDAR camera so portion estimates get a distance
+            // hint; other devices use the plain wide camera.
+            let lidar = AVCaptureDevice.default(.builtInLiDARDepthCamera, for: .video, position: .back)
+            let device = lidar ?? AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
+            if let device, let input = try? AVCaptureDeviceInput(device: device), session.canAddInput(input) {
                 session.addInput(input)
             }
 
@@ -229,6 +359,11 @@ final class ScannerViewModel {
             if session.canAddOutput(barcodeScanner.output) {
                 session.addOutput(barcodeScanner.output)
                 barcodeScanner.configureTypes()
+            }
+
+            if depthOutput != nil, let device = (session.inputs.first as? AVCaptureDeviceInput)?.device,
+               device.deviceType == .builtInLiDARDepthCamera, session.canAddOutput(depthOutput!) {
+                session.addOutput(depthOutput!)
             }
 
             session.commitConfiguration()
@@ -263,18 +398,31 @@ final class ScannerViewModel {
 
     private func handleFrame(_ frame: SendablePixelBuffer) async {
         guard inputMode == .liveCamera else { return }
-        // A barcode match is exact; live classifier frames must not replace it.
-        guard detection?.isBarcodeScan != true else { return }
+        latestFrame = frame
+        // Once something is on screen the result is frozen; the user retakes
+        // to look again.
+        guard detection == nil, !isAnalyzing else { return }
 
-        isClassifying = true
-        defer { isClassifying = false }
+        frameSize = CGSize(width: CVPixelBufferGetWidth(frame.buffer), height: CVPixelBufferGetHeight(frame.buffer))
+        guard let found = await regionDetector.detect(in: frame) else {
+            missedFrames += 1
+            // Tolerate brief dropouts so the box doesn't flicker.
+            if missedFrames >= 4, region != nil {
+                region = nil
+                regionStabilizer.reset()
+                boxSmoother.reset()
+            }
+            return
+        }
+        missedFrames = 0
 
-        guard let results = try? await classifier.classify(pixelBuffer: frame, orientation: .up),
-              let top = results.first else { return }
+        let stable = regionStabilizer.accept(ClassificationResult(label: found.kind.rawValue, confidence: found.confidence))
+        let smoothed = boxSmoother.update(found.box)
+        guard let stable else { return }
 
-        // Only publish once a label has held steady across several frames.
-        guard let stable = stabilizer.accept(top) else { return }
-        publish([stable] + results.dropFirst())
+        let wasLocked = region != nil
+        region = FoodRegion(box: smoothed, kind: FoodRegion.Kind(rawValue: stable.label) ?? .food, confidence: stable.confidence)
+        if !wasLocked { lockCount += 1 }
     }
 
     private func publish(_ results: [ClassificationResult]) {

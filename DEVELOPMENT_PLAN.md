@@ -16,24 +16,25 @@
 ## Tier 1: Recognition Pipeline (tiered: deterministic, local, cloud)
 
 ### Level 0: Instant deterministic paths (on-device)
-- [~] Barcode scan with `VisionKit.DataScannerViewController` + Open Food Facts lookup (`BarcodeScanner.swift`, `OpenFoodFactsClient.swift`, `BarcodeLookupTests.swift` written, uncommitted; wired into `ScannerViewModel`). Remaining: USDA fallback when Open Food Facts misses, device test, commit
-- [ ] Nutrition label OCR with `VNRecognizeTextRequest`: parse calories, protein, carbs, fat locally from the facts panel (add tests with sample label text)
+- [x] Barcode scan (AVFoundation metadata output) + Open Food Facts lookup, USDA FoodData Central fallback (`FallbackProductLookup`)
+- [x] Nutrition label OCR with `VNRecognizeTextRequest` + `NutritionLabelParser` ("Label" button in scanner). Needs tuning against real label photos
 
 ### Level 1: Viewfinder intelligence (local edge ML)
-- [ ] Generic detector (e.g. YOLOv8-nano via Core ML) trained only for "Food Item" / "Beverage" bounding boxes, not food identity
-- [ ] Run `DetectionStabilizer` over detector output: haptic lock-on and crisp bounding box
-- [ ] Retire MobileNetV2 from the live path (`Food101Nutrition.swift` can remain as an offline lookup/fallback)
+- [x] Generic region detector (`FoodRegionDetector`): loads a bundled `FoodDetector` Core ML model if present, otherwise Vision saliency
+- [ ] Train and bundle the YOLOv8-nano food/beverage model (steps in `Proxy/README.md`); saliency is the stand-in until then
+- [x] `DetectionStabilizer` + box smoothing over detector output, haptic on lock-on, crisp box overlay
+- [x] MobileNetV2 removed from the live path (kept as offline fallback after capture)
 
 ### Level 2: Semantic engine (cloud vision API)
-- [ ] On capture, send frame or cropped boxes to a fast multimodal API (GPT-4o-mini or Claude Haiku)
-- [ ] Strict JSON schema: `food_name`, `confidence_score`, `estimated_calories`, `macros` (protein, carbs, fat), `hidden_ingredients_flag` (e.g. glossy oil/butter)
-- [ ] API key kept off-device (thin proxy), timeouts, offline handling, results clearly marked as estimated
-- [ ] SwiftData cache of returned JSON keyed by a local image embedding; near-match skips the network call
+- [x] Capture -> `ProxyVisionClient` -> strict-schema `CloudFoodEstimate` (name, confidence, calories, macros, hidden-ingredients flag, portion bucket)
+- [x] Proxy (`Proxy/worker.js`, Claude Haiku via forced tool call) keeps the API key off-device
+- [ ] Deploy the proxy and set `proxyURL` / `proxyToken`; add rate limiting
+- [x] SwiftData cache (`CachedEstimate`) keyed by Vision feature print; near-match skips the network. Match threshold (0.3) needs tuning on real photos
 
 ### Level 3: Pragmatic portion estimation
-- [ ] ARKit depth confidence to get distance to plate; pass to the LLM prompt with reference-object hints (plate size, fork)
-- [ ] Portion returned as buckets: Small, Medium, Large, Cup, Tablespoon, Palm-sized
-- [ ] Frictionless override: slider or segmented control under the scanned item scales macros live; AI guess is never final
+- [x] LiDAR distance via `AVCaptureDepthDataOutput` (not ARKit: ARKit would take the camera from the live preview); sent to the proxy as a size hint. Untested on hardware
+- [x] Portion buckets from the model (Small, Medium, Large, Cup, Tablespoon, Palm-sized)
+- [x] Portion slider (0.25x-3x) under the result scales all macros; flows into Meal Detail
 
 ### Deferred (after the above)
 - [ ] Learn from user corrections (on-device personalization)

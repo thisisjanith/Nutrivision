@@ -6,11 +6,13 @@
 import SwiftUI
 import AVFoundation
 import PhotosUI
+import SwiftData
 
 struct ScannerView: View {
     var onClose: () -> Void
     var onConfirm: (DetectedFood) -> Void
 
+    @Environment(\.modelContext) private var modelContext
     @State private var viewModel = ScannerViewModel()
     @State private var photosPickerItem: PhotosPickerItem?
     @State private var pickedImage: UIImage?
@@ -21,7 +23,9 @@ struct ScannerView: View {
 
             background
 
-            if let detection = viewModel.detection {
+            if viewModel.detection == nil, viewModel.inputMode == .liveCamera, let region = viewModel.region {
+                regionOverlay(region)
+            } else if let detection = viewModel.detection {
                 boundingBoxOverlay(detection: detection)
             }
 
@@ -32,12 +36,22 @@ struct ScannerView: View {
                     detectionSheet(detection: detection)
                 } else if viewModel.inputMode == .liveCamera {
                     scanningHint
+                    captureBar
                 }
             }
+
+            if viewModel.isAnalyzing {
+                ProgressView("Analyzing…")
+                    .padding(Theme.Spacing.lg)
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
+            }
         }
+        .sensoryFeedback(.impact(weight: .light), trigger: viewModel.lockCount)
+        .sensoryFeedback(.success, trigger: viewModel.detection?.id)
         .statusBarHidden(true)
         .animation(.snappy(duration: 0.25), value: viewModel.detection)
         .task {
+            viewModel.attach(modelContext: modelContext)
             if viewModel.inputMode == .liveCamera {
                 await viewModel.start()
             }
@@ -107,7 +121,7 @@ struct ScannerView: View {
 
     private func boundingBoxOverlay(detection: DetectedFood) -> some View {
         VStack(spacing: Theme.Spacing.sm) {
-            Text(detection.isBarcodeScan ? detection.displayName : "\(detection.displayName) — \(detection.confidencePercent)%")
+            Text(detection.isExact ? detection.displayName : "\(detection.displayName) — \(detection.confidencePercent)%")
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundStyle(.white)
@@ -121,9 +135,60 @@ struct ScannerView: View {
         }
     }
 
+    /// Crisp box around the food the detector has locked onto.
+    private func regionOverlay(_ region: FoodRegion) -> some View {
+        GeometryReader { proxy in
+            let rect = region.viewRect(in: proxy.size, imageSize: viewModel.frameSize)
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.brandPrimary, lineWidth: 3)
+                .overlay(alignment: .topLeading) {
+                    Text(region.kind == .beverage ? "Beverage" : "Food")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(Color.brandPrimary, in: Capsule())
+                        .offset(x: 8, y: -12)
+                }
+                .frame(width: rect.width, height: rect.height)
+                .position(x: rect.midX, y: rect.midY)
+                .animation(.smooth(duration: 0.2), value: rect)
+        }
+        .ignoresSafeArea()
+        .allowsHitTesting(false)
+    }
+
+    private var captureBar: some View {
+        HStack(spacing: Theme.Spacing.xl) {
+            Button {
+                Task { await viewModel.scanLabel() }
+            } label: {
+                Label("Label", systemImage: "text.viewfinder")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, Theme.Spacing.md)
+                    .padding(.vertical, Theme.Spacing.sm)
+                    .background(.black.opacity(0.45), in: Capsule())
+            }
+            .accessibilityLabel("Scan nutrition label")
+
+            Button {
+                Task { await viewModel.captureAndAnalyze() }
+            } label: {
+                Circle()
+                    .strokeBorder(.white, lineWidth: 4)
+                    .background(Circle().fill(viewModel.region != nil ? Color.brandPrimary : .white.opacity(0.85)).padding(6))
+                    .frame(width: 72, height: 72)
+            }
+            .accessibilityLabel("Capture and analyze food")
+        }
+        .disabled(viewModel.isAnalyzing || !viewModel.hasCapturableFrame)
+        .padding(.bottom, Theme.Spacing.lg)
+    }
+
     private var barcodeStatusText: String? {
         if viewModel.isLookingUpBarcode { return "Looking up product…" }
-        return viewModel.barcodeMessage
+        return viewModel.statusMessage ?? viewModel.barcodeMessage
     }
 
     private var scanningHint: some View {
@@ -145,7 +210,7 @@ struct ScannerView: View {
                 .padding(.top, Theme.Spacing.sm)
 
             VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
-                Text(detection.isBarcodeScan ? "PRODUCT" : "DETECTED")
+                Text(detection.isBarcodeScan ? "PRODUCT" : detection.isLabelScan ? "LABEL" : detection.isCloudEstimate ? "AI ESTIMATE" : "DETECTED")
                     .font(.caption2)
                     .fontWeight(.semibold)
                     .foregroundStyle(.white.opacity(0.6))
@@ -154,7 +219,7 @@ struct ScannerView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
-                if let nutrition = detection.nutrition {
+                if let nutrition = detection.scaledNutrition {
                     Text("\(Int(nutrition.calories.rounded())) kcal · \(nutrition.servingSize)")
                         .font(.subheadline)
                         .foregroundStyle(.white.opacity(0.75))
@@ -168,10 +233,26 @@ struct ScannerView: View {
                         .font(.caption)
                         .foregroundStyle(.yellow)
                 }
+                if detection.isCloudEstimate {
+                    Label(detection.fromCache ? "Estimated · from your previous scan" : "Estimated by AI — adjust if needed",
+                          systemImage: "sparkles")
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.7))
+                }
+                if detection.estimate?.hiddenIngredientsFlag == true {
+                    Label(detection.estimate?.hiddenIngredientsNote ?? "May contain hidden oil, butter or sugar",
+                          systemImage: "drop.fill")
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            if !detection.alternatives.isEmpty && !detection.isBarcodeScan {
+            if detection.nutrition != nil {
+                portionControl(detection: detection)
+            }
+
+            if !detection.alternatives.isEmpty && !detection.isExact {
                 alternativesRow(detection: detection)
             }
 
@@ -204,6 +285,37 @@ struct ScannerView: View {
         .padding(.bottom, Theme.Spacing.lg)
         .frame(maxWidth: .infinity)
         .background(.black.opacity(0.75), in: UnevenRoundedRectangle(topLeadingRadius: Theme.Radius.sheet, topTrailingRadius: Theme.Radius.sheet))
+    }
+
+    /// Portion override. The model's size guess is a starting point, so the
+    /// user can scale every macro up or down without leaving the scanner.
+    private func portionControl(detection: DetectedFood) -> some View {
+        let scale = Binding<Double>(
+            get: { viewModel.detection?.portionScale ?? 1 },
+            set: { viewModel.detection?.portionScale = $0 }
+        )
+        return VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
+            HStack {
+                Text("PORTION")
+                    .font(.caption2.weight(.semibold))
+                    .tracking(1.2)
+                    .foregroundStyle(.white.opacity(0.6))
+                Spacer()
+                if let bucket = detection.estimate?.portion {
+                    Text("AI guessed: \(bucket.label)")
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.6))
+                }
+                Text("×\(scale.wrappedValue.formatted(.number.precision(.fractionLength(0...2))))")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.white)
+                    .monospacedDigit()
+            }
+            Slider(value: scale, in: 0.25...3, step: 0.05)
+                .tint(Color.brandPrimary)
+                .accessibilityLabel("Portion size multiplier")
+        }
+        .sensoryFeedback(.selection, trigger: Int((scale.wrappedValue * 4).rounded()))
     }
 
     /// The classifier's runners-up, one tap away.

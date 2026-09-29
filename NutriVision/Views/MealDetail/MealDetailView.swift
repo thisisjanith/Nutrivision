@@ -16,7 +16,7 @@ struct DraftMeal: Identifiable {
     var confidence: Double
 
     static func from(detection: DetectedFood) -> DraftMeal {
-        guard let nutrition = detection.nutrition else {
+        guard let nutrition = detection.scaledNutrition else {
             return DraftMeal(
                 name: detection.displayName,
                 proteinGrams: 0,
