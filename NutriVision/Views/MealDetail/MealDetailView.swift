@@ -118,6 +118,8 @@ struct MealDetailView: View {
     @State private var carbsGrams: Double
     @State private var fatGrams: Double
     @State private var favoriteSaved = false
+    /// Decoded once; decoding in `body` re-ran on every slider tick.
+    @State private var thumbnail: UIImage?
 
     init(draft: DraftMeal) {
         self.draft = draft
@@ -164,9 +166,9 @@ struct MealDetailView: View {
                 servingRow
 
                 VStack(spacing: Theme.Spacing.lg) {
-                    macroSlider(label: "Protein", color: .macroProtein, value: $proteinGrams, base: 200)
-                    macroSlider(label: "Carbs", color: .macroCarbs, value: $carbsGrams, base: 400)
-                    macroSlider(label: "Fat", color: .macroFat, value: $fatGrams, base: 150)
+                    macroSlider(label: "Protein", color: .macroProtein, value: $proteinGrams, base: 200, unitGrams: draft.proteinGrams)
+                    macroSlider(label: "Carbs", color: .macroCarbs, value: $carbsGrams, base: 400, unitGrams: draft.carbsGrams)
+                    macroSlider(label: "Fat", color: .macroFat, value: $fatGrams, base: 150, unitGrams: draft.fatGrams)
                 }
 
                 kcalTotalView
@@ -178,8 +180,18 @@ struct MealDetailView: View {
             .padding(.bottom, Theme.Spacing.lg)
         }
         .scrollIndicators(.hidden)
+        .scrollBounceBehavior(.basedOnSize)
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.hidden)
+        .presentationContentInteraction(.resizes)
+        .task {
+            // Camera frames are full-resolution JPEGs; decode off the main
+            // thread so the sheet never blocks while it animates in.
+            guard thumbnail == nil, let data = draft.photoData else { return }
+            thumbnail = await Task.detached(priority: .userInitiated) {
+                UIImage(data: data)?.preparingThumbnail(of: CGSize(width: 132, height: 132))
+            }.value
+        }
         .onAppear {
             // Editing an entry starts from its stored macros, not a rescaled base.
             if draft.editing != nil { amount = 1 }
@@ -188,8 +200,8 @@ struct MealDetailView: View {
 
     private var header: some View {
         HStack(spacing: Theme.Spacing.sm) {
-            if let data = draft.photoData, let image = UIImage(data: data) {
-                Image(uiImage: image)
+            if let thumbnail {
+                Image(uiImage: thumbnail)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 44, height: 44)
@@ -295,7 +307,7 @@ struct MealDetailView: View {
         }
     }
 
-    private func macroSlider(label: String, color: Color, value: Binding<Double>, base: Double) -> some View {
+    private func macroSlider(label: String, color: Color, value: Binding<Double>, base: Double, unitGrams: Double) -> some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
             HStack {
                 Text(label)
@@ -308,9 +320,10 @@ struct MealDetailView: View {
                     .fontWeight(.semibold)
                     .monospacedDigit()
             }
-            // Scaled servings can exceed the usual ceiling; grow it so the
-            // thumb never pins at the end.
-            Slider(value: value, in: 0...max(base, value.wrappedValue * 1.25))
+            // Scaled servings can exceed the usual ceiling, so the range follows
+            // the serving size, never the live value: a range that moves while
+            // the thumb is dragged makes the slider jitter.
+            Slider(value: value, in: 0...max(base, unitGrams * factor * 1.5))
                 .tint(color)
                 .accessibilityLabel("\(label) grams")
         }
@@ -327,7 +340,7 @@ struct MealDetailView: View {
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
-        .animation(.spring(response: 0.4, dampingFraction: 0.85), value: kcalTotal)
+        .animation(.snappy(duration: 0.15), value: kcalTotal)
         .accessibilityElement(children: .combine)
     }
 

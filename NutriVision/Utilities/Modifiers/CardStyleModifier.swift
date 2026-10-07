@@ -11,8 +11,11 @@ struct CardStyleModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(padding)
-            .background(Color.cardBackground)
-            .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
+            .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous)
+                    .stroke(.white.opacity(0.06), lineWidth: 1)
+            }
     }
 }
 

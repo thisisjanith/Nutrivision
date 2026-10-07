@@ -6,8 +6,28 @@
 import SwiftUI
 import SwiftData
 
-enum AppTab {
-    case dashboard, scan, history, insights
+enum AppTab: CaseIterable {
+    case dashboard, history, scan, insights, profile
+
+    var title: String {
+        switch self {
+        case .dashboard: "Home"
+        case .history: "History"
+        case .scan: "Scan"
+        case .insights: "Insights"
+        case .profile: "Profile"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .dashboard: "house.fill"
+        case .history: "clock.fill"
+        case .scan: "viewfinder"
+        case .insights: "chart.bar.fill"
+        case .profile: "person.crop.circle.fill"
+        }
+    }
 }
 
 struct ContentView: View {
@@ -15,41 +35,77 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     @State private var selectedTab: AppTab = .dashboard
+    @State private var showScanner = false
     @State private var mealDetailDraft: DraftMeal?
     @State private var showFoodSearch = false
     @State private var pendingDraft: DraftMeal?
-    @State private var showSettings = false
+    @State private var scannedDraft: DraftMeal?
     @State private var profileStore = ProfileStore.shared
 
+    /// Selecting the middle "Scan" tab opens the scanner and snaps back to the
+    /// previous tab, so it behaves like a button inside the native tab bar.
+    private var tabSelection: Binding<AppTab> {
+        Binding(
+            get: { selectedTab },
+            set: { newValue in
+                if newValue == .scan {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    showScanner = true
+                } else {
+                    selectedTab = newValue
+                }
+            }
+        )
+    }
+
     var body: some View {
-        TabView(selection: $selectedTab) {
-            DashboardView(
-                onAddFood: { showFoodSearch = true },
-                onOpenSettings: { showSettings = true },
-                onEdit: { mealDetailDraft = .from(meal: $0) }
-            )
-            .tabItem { Label("Dashboard", systemImage: "square.grid.2x2.fill") }
+        TabView(selection: tabSelection) {
+            tabPage {
+                DashboardView(
+                    onAddFood: { showFoodSearch = true },
+                    onScan: { showScanner = true },
+                    onEdit: { mealDetailDraft = .from(meal: $0) }
+                )
+            }
+            .tabItem { Label(AppTab.dashboard.title, systemImage: AppTab.dashboard.systemImage) }
             .tag(AppTab.dashboard)
 
-            ScannerView(
-                onClose: { selectedTab = .dashboard },
-                onConfirm: { detection in
-                    mealDetailDraft = DraftMeal.from(detection: detection)
-                    selectedTab = .dashboard
-                }
-            )
-            .tabItem { Label("Scan", systemImage: "camera.fill") }
-            .tag(AppTab.scan)
-
-            MealHistoryView(onEdit: { mealDetailDraft = .from(meal: $0) })
-                .tabItem { Label("History", systemImage: "clock.fill") }
+            tabPage { MealHistoryView(onEdit: { mealDetailDraft = .from(meal: $0) }) }
+                .tabItem { Label(AppTab.history.title, systemImage: AppTab.history.systemImage) }
                 .tag(AppTab.history)
 
-            InsightsView()
-                .tabItem { Label("Insights", systemImage: "chart.xyaxis.line") }
+            Color.clear
+                .tabItem { Label(AppTab.scan.title, systemImage: AppTab.scan.systemImage) }
+                .tag(AppTab.scan)
+
+            tabPage { InsightsView() }
+                .tabItem { Label(AppTab.insights.title, systemImage: AppTab.insights.systemImage) }
                 .tag(AppTab.insights)
+
+            tabPage { SettingsView(store: profileStore, embedded: true) }
+                .tabItem { Label(AppTab.profile.title, systemImage: AppTab.profile.systemImage) }
+                .tag(AppTab.profile)
         }
         .tint(.brandPrimary)
+        .preferredColorScheme(.dark)
+        .fullScreenCover(isPresented: $showScanner, onDismiss: {
+            if let draft = scannedDraft {
+                scannedDraft = nil
+                mealDetailDraft = draft
+            }
+        }) {
+            ScannerView(
+                onClose: { showScanner = false },
+                onConfirm: { detection in
+                    // Presented from onDismiss below: a sheet that starts while the
+                    // cover is still leaving ends up with a dead drag gesture.
+                    scannedDraft = DraftMeal.from(detection: detection)
+                    selectedTab = .dashboard
+                    showScanner = false
+                }
+            )
+            .preferredColorScheme(.dark)
+        }
         .sheet(item: $mealDetailDraft) { draft in
             MealDetailView(draft: draft)
         }
@@ -61,7 +117,6 @@ struct ContentView: View {
         }) {
             FoodSearchView { pendingDraft = $0 }
         }
-        .sheet(isPresented: $showSettings) { SettingsView(store: profileStore) }
         .fullScreenCover(isPresented: Binding(
             get: { !profileStore.profile.hasOnboarded },
             set: { _ in }
@@ -82,9 +137,18 @@ struct ContentView: View {
     /// Applies things done outside the app process: a widget button that
     /// asked for the scanner, and water logged from a widget or Siri.
     private func drainExternalActions() {
-        if PendingRoute.take() == "scan" { selectedTab = .scan }
+        if PendingRoute.take() == "scan" { showScanner = true }
         let water = PendingWater.take()
         if water > 0 { Tracker.shared.addWater(milliliters: water, context: modelContext) }
+    }
+}
+
+private extension ContentView {
+    func tabPage<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
+        ZStack {
+            AppBackground()
+            content()
+        }
     }
 }
 

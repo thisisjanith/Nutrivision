@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B1C2D3E4F5A60718293A4B5D /* MoreWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* MoreWidgets.swift */; };
 		1519F2170DB7906F6BA4EBC7 /* WatchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FADA5BB2E99F952BE0C3A3 /* WatchContentView.swift */; };
 		21DD6BBD37DFF84C475E9A68 /* NutriIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590EBD94EDECCB0DEEC4692A /* NutriIntents.swift */; };
 		21EBE76E04C5FAC8B8CACC60 /* FastingLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E19CFAD7A319A422A47BEB1 /* FastingLiveActivity.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A1B2C3D4E5F60718293A4B5C /* MoreWidgets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MoreWidgets.swift; sourceTree = "<group>"; };
 		0A6EC6B59C2E77090627CDAE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		129E163924CE2DF42DD4F3C0 /* FastingActivityAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FastingActivityAttributes.swift; path = NutriVision/Services/FastingActivityAttributes.swift; sourceTree = "<group>"; };
 		1D538830EDF9FBEAE050F315 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				335B09B8940E1B83C814241D /* CalorieWidget.swift */,
+				A1B2C3D4E5F60718293A4B5C /* MoreWidgets.swift */,
 				8E19CFAD7A319A422A47BEB1 /* FastingLiveActivity.swift */,
 				B9BAB2DD47948592764C69E2 /* NutriVisionWidgetBundle.swift */,
 				0A6EC6B59C2E77090627CDAE /* Info.plist */,
@@ -436,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				807D7B862E73E4BA20A752C7 /* CalorieWidget.swift in Sources */,
+				B1C2D3E4F5A60718293A4B5D /* MoreWidgets.swift in Sources */,
 				21EBE76E04C5FAC8B8CACC60 /* FastingLiveActivity.swift in Sources */,
 				3914CC8340F21266CFB0B5E6 /* NutriVisionWidgetBundle.swift in Sources */,
 				CAF97192DAE64116A9985CF7 /* DailySnapshot.swift in Sources */,

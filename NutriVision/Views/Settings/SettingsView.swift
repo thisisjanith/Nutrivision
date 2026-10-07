@@ -8,6 +8,8 @@ import SwiftData
 
 struct SettingsView: View {
     @Bindable var store: ProfileStore
+    /// True when shown as the Profile tab rather than a modal sheet.
+    var embedded = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \MealEntry.timestamp) private var meals: [MealEntry]
@@ -28,9 +30,12 @@ struct SettingsView: View {
                 exportSection
                 aboutSection
             }
-            .navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
+            .navigationTitle(embedded ? "Profile" : "Settings")
+            .navigationBarTitleDisplayMode(embedded ? .large : .inline)
+            .scrollContentBackground(.hidden)
+            .toolbar {
+                if !embedded { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
+            }
             .onAppear { overrideOn = store.profile.calorieOverride != nil }
             .onDisappear { Tracker.shared.refreshSnapshot(context: modelContext) }
         }

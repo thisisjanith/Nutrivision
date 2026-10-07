@@ -66,7 +66,7 @@ struct InsightsView: View {
                 }
                 .padding(Theme.Spacing.md)
             }
-            .background(Color(.systemGroupedBackground))
+            .background(Color.clear)
             .navigationTitle("Insights")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {

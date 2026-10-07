@@ -1,1227 +1,1766 @@
 {
-  "sourceLanguage": "en",
-  "version": "1.0",
-  "strings": {
-    "AI ESTIMATE": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ESTIMACIÓN IA"
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "· %@" : {
+
+    },
+    "%@ × %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ × %2$@"
+          }
+        }
+      }
+    },
+    "%@ grams" : {
+
+    },
+    "%@ of %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ of %2$@"
+          }
+        }
+      }
+    },
+    "%@ times portion" : {
+
+    },
+    "%@%@ per week" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@ per week"
+          }
+        }
+      }
+    },
+    "%@×" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lld kcal" : {
+
+    },
+    "%lld kcal active" : {
+
+    },
+    "%lld kilocalories %@. Eaten %lld, goal %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld kilocalories %2$@. Eaten %3$lld, goal %4$lld"
+          }
+        }
+      }
+    },
+    "%lld kilocalories today" : {
+
+    },
+    "%lld of %lld grams" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld grams"
+          }
+        }
+      }
+    },
+    "%lld percent confidence" : {
+
+    },
+    "%lld steps" : {
+
+    },
+    "%lld%%" : {
+
+    },
+    "%lld%% match" : {
+
+    },
+    "%lldg" : {
+
+    },
+    "+%lld" : {
+
+    },
+    "+250 ml" : {
+
+    },
+    "×%@" : {
+
+    },
+    "🍽️" : {
+
+    },
+    "0.5 kg / week" : {
+
+    },
+    "0.25 kg / week" : {
+
+    },
+    "0.75 kg / week" : {
+
+    },
+    "About" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acerca de"
+          }
+        }
+      }
+    },
+    "About you" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobre ti"
+          }
+        }
+      }
+    },
+    "Activity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actividad"
+          }
+        }
+      }
+    },
+    "Adaptive goal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meta adaptable"
+          }
+        }
+      }
+    },
+    "Add" : {
+
+    },
+    "Add %@ to log" : {
+
+    },
+    "Add %lld milliliters of water" : {
+
+    },
+    "Add food" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir comida"
+          }
+        }
+      }
+    },
+    "Add Food" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir alimento"
+          }
+        }
+      }
+    },
+    "Add from database" : {
+
+    },
+    "Add ingredient" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir ingrediente"
+          }
+        }
+      }
+    },
+    "Add to log" : {
+
+    },
+    "Add Water" : {
+
+    },
+    "Add your weight to see your trend." : {
+
+    },
+    "Age" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edad"
           }
         }
       }
+    },
+    "Age: %lld" : {
+
+    },
+    "AI ESTIMATE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ESTIMACIÓN IA"
+          }
+        }
+      }
+    },
+    "AI guessed: %@" : {
+
     },
-    "About": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Acerca de"
+    "Analyzing…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analizando…"
           }
         }
       }
     },
-    "About you": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sobre ti"
+    "Back" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atrás"
           }
         }
       }
     },
-    "Activity": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actividad"
+    "Balanced" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Equilibrada"
           }
         }
       }
     },
-    "Adaptive goal": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meta adaptable"
+    "Based on Mifflin-St Jeor: about %lld kcal to maintain your weight." : {
+
+    },
+    "Based on your weight trend and intake, you burn about %lld kcal a day." : {
+
+    },
+    "best streak" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mejor racha"
           }
         }
       }
+    },
+    "Beverage" : {
+
     },
-    "Add Food": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añadir alimento"
+    "Breakfast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desayuno"
           }
         }
       }
     },
-    "Add food": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añadir comida"
+    "Calorie Goal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meta de calorías"
           }
         }
       }
     },
-    "Add ingredient": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añadir ingrediente"
+    "Calorie targets are estimates, not medical advice." : {
+
+    },
+    "Calories" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calorías"
           }
         }
       }
+    },
+    "Calories from protein, carbs and fat per day" : {
+
+    },
+    "Calories Left" : {
+
     },
-    "Age": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edad"
+    "Calories Left Today" : {
+
+    },
+    "calories per day" : {
+
+    },
+    "Calories per day" : {
+
+    },
+    "Camera access needed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se necesita acceso a la cámara"
           }
         }
       }
     },
-    "Analyzing…": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Analizando…"
+    "Cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         }
       }
     },
-    "Back": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atrás"
+    "Capture and analyze food" : {
+
+    },
+    "Carbs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carbohidratos"
           }
         }
       }
     },
-    "Balanced": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Equilibrada"
+    "Change detection to %@" : {
+
+    },
+    "Choose a Photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir una foto"
           }
         }
       }
     },
-    "Breakfast": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desayuno"
+    "Choose a photo instead" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir una foto"
           }
         }
       }
+    },
+    "Clear search" : {
+
     },
-    "Calorie Goal": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meta de calorías"
+    "Close" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
           }
         }
       }
     },
-    "Calories": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Calorías"
+    "cm" : {
+
+    },
+    "consistency" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "constancia"
           }
         }
       }
     },
-    "Camera access needed": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se necesita acceso a la cámara"
+    "Continue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar"
           }
         }
       }
     },
-    "Cancel": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancelar"
+    "Create food or recipe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear alimento o receta"
           }
         }
       }
     },
-    "Carbs": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Carbohidratos"
+    "Dashboard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicio"
           }
         }
       }
     },
-    "Choose a Photo": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elegir una foto"
+    "Database" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Base de datos"
           }
         }
       }
+    },
+    "Date" : {
+
     },
-    "Choose a photo instead": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elegir una foto"
+    "Day" : {
+
+    },
+    "day streak" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "días seguidos"
           }
         }
       }
+    },
+    "Decrease fasting goal" : {
+
+    },
+    "Decrease servings" : {
+
     },
-    "Close": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cerrar"
+    "Delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
           }
         }
       }
     },
-    "Continue": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continuar"
+    "DETECTED" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DETECTADO"
           }
         }
       }
     },
-    "Create food or recipe": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Crear alimento o receta"
+    "Diet style" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo de dieta"
           }
         }
       }
     },
-    "DETECTED": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DETECTADO"
+    "Dinner" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cena"
           }
         }
       }
     },
-    "Dashboard": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Inicio"
+    "Done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo"
           }
         }
       }
     },
-    "Database": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Base de datos"
+    "Double tap to edit" : {
+
+    },
+    "Edit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
           }
         }
       }
     },
-    "Delete": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eliminar"
+    "End fast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminar ayuno"
           }
         }
       }
+    },
+    "Ends %@" : {
+
+    },
+    "Enter \"%@\" manually" : {
+
     },
-    "Diet style": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tipo de dieta"
+    "Enter manually" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introducir manualmente"
           }
         }
       }
     },
-    "Dinner": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cena"
+    "Estimated · from your previous scan" : {
+
+    },
+    "Estimated by AI — adjust if needed" : {
+
+    },
+    "Export" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar"
           }
         }
       }
+    },
+    "Export CSV" : {
+
     },
-    "Done": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Listo"
+    "Export data" : {
+
+    },
+    "Export PDF" : {
+
+    },
+    "Fast (0.75 kg/wk)" : {
+
+    },
+    "Fasting" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayuno"
           }
         }
       }
     },
-    "Edit": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Editar"
+    "fasting goal" : {
+      "comment" : "A label displayed under a fasting goal.",
+      "isCommentAutoGenerated" : true
+    },
+    "Fat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grasa"
           }
         }
       }
     },
-    "End fast": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terminar ayuno"
+    "Favorites" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
           }
         }
       }
+    },
+    "Food" : {
+
+    },
+    "Food name" : {
+
     },
-    "Enter manually": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Introducir manualmente"
+    "Gain weight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ganar peso"
           }
         }
       }
     },
-    "Export": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Exportar"
+    "Gentle (0.25 kg/wk)" : {
+
+    },
+    "Get Started" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empezar"
           }
         }
       }
     },
-    "Fasting": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ayuno"
+    "Goal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meta"
           }
         }
       }
+    },
+    "Goal %lld" : {
+
+    },
+    "Goal reached" : {
+
     },
-    "Fat": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grasa"
+    "Goals" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Metas"
           }
         }
       }
     },
-    "Favorites": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Favoritos"
+    "h" : {
+
+    },
+    "Health access wasn't granted. You can change this in the Health app." : {
+
+    },
+    "Height" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estatura"
           }
         }
       }
     },
-    "Gain weight": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ganar peso"
+    "High protein" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alta en proteína"
           }
         }
       }
     },
-    "Get Started": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Empezar"
+    "History" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historial"
           }
         }
       }
     },
-    "Goal": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meta"
+    "How active are you?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué tan activo eres?"
           }
         }
       }
+    },
+    "I couldn't find \"%@\" in the food database." : {
+
     },
-    "Goals": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Metas"
+    "iCloud sync" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronización con iCloud"
           }
         }
       }
     },
-    "Height": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Estatura"
+    "iCloud sync takes effect the next time the app launches and needs you to be signed in to iCloud." : {
+
+    },
+    "Imperial" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imperial"
           }
         }
       }
+    },
+    "Import weights from Apple Health" : {
+
+    },
+    "Imported %lld weigh-ins." : {
+
+    },
+    "in" : {
+
+    },
+    "Increase fasting goal" : {
+
+    },
+    "Increase servings" : {
+
     },
-    "High protein": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alta en proteína"
+    "Ingredient" : {
+
+    },
+    "Ingredients" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingredientes"
           }
         }
       }
     },
-    "History": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Historial"
+    "Insights" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estadísticas"
           }
         }
       }
     },
-    "How active are you?": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¿Qué tan activo eres?"
+    "Integrations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integraciones"
           }
         }
       }
+    },
+    "kcal" : {
+
+    },
+    "kcal · %@" : {
+
+    },
+    "kcal left" : {
+
+    },
+    "kcal over" : {
+
+    },
+    "KCAL TODAY" : {
+
     },
-    "Imperial": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Imperial"
+    "kcal total" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kcal en total"
           }
         }
       }
     },
-    "Ingredients": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ingredientes"
+    "Keto" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keto"
           }
         }
       }
     },
-    "Insights": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Estadísticas"
+    "Label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiqueta"
           }
         }
       }
     },
-    "Integrations": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Integraciones"
+    "LABEL" : {
+
+    },
+    "Latest %@" : {
+
+    },
+    "Log %@ now" : {
+
+    },
+    "Log Food" : {
+
+    },
+    "Log Weight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registrar peso"
           }
         }
       }
+    },
+    "Log your first weigh-in" : {
+
+    },
+    "Logged %@" : {
+
     },
-    "Keto": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keto"
+    "Logged %@, %lld calories. %lld left today." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Logged %1$@, %2$lld calories. %3$lld left today."
           }
         }
       }
     },
-    "Label": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Etiqueta"
+    "Logs a food from the NutriVision database, e.g. \"a banana\"." : {
+
+    },
+    "Logs a glass of water." : {
+
+    },
+    "Lose weight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perder peso"
           }
         }
       }
     },
-    "Log Weight": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Registrar peso"
+    "Low carb" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baja en carbohidratos"
           }
         }
       }
+    },
+    "Low confidence — please verify" : {
+
     },
-    "Lose weight": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perder peso"
+    "Lunch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Almuerzo"
           }
         }
       }
     },
-    "Low carb": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Baja en carbohidratos"
+    "Macro" : {
+
+    },
+    "Macro split for the %@" : {
+
+    },
+    "Macros" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Macros"
           }
         }
       }
     },
-    "Lunch": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Almuerzo"
+    "Maintain weight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mantener peso"
           }
         }
       }
+    },
+    "Makes" : {
+
     },
-    "Macros": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Macros"
+    "Meal" : {
+
+    },
+    "Meal deleted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comida eliminada"
           }
         }
       }
     },
-    "Maintain weight": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mantener peso"
+    "Meal reminders" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recordatorios de comidas"
           }
         }
       }
+    },
+    "Meals you scan and save will show up here." : {
+
     },
-    "Meal deleted": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Comida eliminada"
+    "Metric" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métrico"
           }
         }
       }
     },
-    "Meal reminders": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recordatorios de comidas"
+    "Milliliters" : {
+
+    },
+    "Month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mes"
           }
         }
       }
     },
-    "Metric": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Métrico"
+    "More ways to add" : {
+
+    },
+    "My Foods & Recipes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mis alimentos y recetas"
           }
         }
       }
     },
-    "Month": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mes"
+    "Name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
           }
         }
       }
     },
-    "My Foods & Recipes": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mis alimentos y recetas"
+    "New Food" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo alimento"
           }
         }
       }
     },
-    "NOT QUITE? TRY": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¿NO ES? PRUEBA"
+    "New Recipe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva receta"
           }
         }
       }
+    },
+    "No data" : {
+
     },
-    "Name": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nombre"
+    "No Meals Logged" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin comidas registradas"
           }
         }
       }
     },
-    "New Food": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nuevo alimento"
+    "No meals yet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay comidas"
           }
         }
       }
     },
-    "New Recipe": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nueva receta"
+    "No nutrition match found — edit manually" : {
+
+    },
+    "No results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin resultados"
           }
         }
       }
+    },
+    "No weigh-ins yet" : {
+
+    },
+    "None" : {
+
     },
-    "No Meals Logged": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sin comidas registradas"
+    "NOT QUITE? TRY" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿NO ES? PRUEBA"
           }
         }
       }
+    },
+    "Nothing logged yet" : {
+
+    },
+    "Nothing matches \"%@\"." : {
+
+    },
+    "Notifications are turned off for NutriVision. Enable them in Settings." : {
+
     },
-    "No meals yet": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aún no hay comidas"
+    "of %@" : {
+
+    },
+    "of %lld g" : {
+
+    },
+    "On track to reach %@ around %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "On track to reach %1$@ around %2$@."
           }
         }
       }
     },
-    "No results": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sin resultados"
+    "Open Settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir Ajustes"
           }
         }
       }
+    },
+    "Opens NutriVision straight to the scanner." : {
+
     },
-    "Open Settings": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abrir Ajustes"
+    "Pace" : {
+
+    },
+    "Per serving" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por porción"
           }
         }
       }
     },
-    "PORTION": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PORCIÓN"
+    "Per serving: %lld kcal · P %lld · C %lld · F %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Per serving: %1$lld kcal · P %2$lld · C %3$lld · F %4$lld"
           }
         }
       }
     },
-    "PRODUCT": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PRODUCTO"
+    "Point your camera at food or a barcode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apunta la cámara a un alimento o código de barras"
           }
         }
       }
     },
-    "Per serving": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Por porción"
+    "PORTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PORCIÓN"
           }
         }
       }
+    },
+    "Portion size multiplier" : {
+
+    },
+    "Prepare export (%lld meals)" : {
+
     },
-    "Point your camera at food or a barcode": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apunta la cámara a un alimento o código de barras"
+    "PRODUCT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PRODUCTO"
           }
         }
       }
     },
-    "Profile": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perfil"
+    "Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
           }
         }
       }
     },
-    "Protein": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Proteína"
+    "Protein" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proteína"
           }
         }
       }
     },
-    "Recent": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recientes"
+    "Protein %lld grams, carbs %lld grams, fat %lld grams" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Protein %1$lld grams, carbs %2$lld grams, fat %3$lld grams"
           }
         }
       }
     },
-    "Retake": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Repetir"
+    "Protein %lld percent, carbs %lld percent, fat %lld percent" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Protein %1$lld percent, carbs %2$lld percent, fat %3$lld percent"
           }
         }
       }
     },
-    "Save": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guardar"
+    "Range" : {
+
+    },
+    "Recent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recientes"
           }
         }
       }
     },
-    "Save to Log": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guardar en el registro"
+    "Retake" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repetir"
           }
         }
       }
     },
-    "Scan": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escanear"
+    "Save" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         }
       }
+    },
+    "Save as favorite" : {
+
+    },
+    "Save to favorites" : {
+
     },
-    "Search foods": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscar alimentos"
+    "Save to Log" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar en el registro"
           }
         }
       }
     },
-    "Search meals": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscar comidas"
+    "Saved to favorites" : {
+
+    },
+    "Scan" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escanear"
           }
         }
       }
+    },
+    "Scan a meal" : {
+
+    },
+    "Scan Food" : {
+
     },
-    "Sedentary": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sedentario"
+    "Scan nutrition label" : {
+
+    },
+    "Search" : {
+
+    },
+    "Search foods" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar alimentos"
           }
         }
       }
+    },
+    "Search for a food" : {
+
     },
-    "Serving size": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tamaño de porción"
+    "Search meals" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar comidas"
           }
         }
       }
     },
-    "Servings": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Porciones"
+    "Sedentary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sedentario"
           }
         }
       }
     },
-    "Settings": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes"
+    "Serving size" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamaño de porción"
           }
         }
       }
     },
-    "Snack": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Merienda"
+    "Servings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Porciones"
           }
         }
       }
     },
-    "Start fast": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Iniciar ayuno"
+    "Set calories manually" : {
+
+    },
+    "Set daily goal to %lld kcal" : {
+
+    },
+    "Settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
           }
         }
       }
+    },
+    "Sex" : {
+
     },
-    "Streak": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Racha"
+    "Share CSV" : {
+
+    },
+    "Share PDF" : {
+
+    },
+    "Snack" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merienda"
           }
         }
       }
+    },
+    "Snap a photo of your meal and we'll recognise it for you." : {
+
     },
-    "Sync with Apple Health": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sincronizar con Apple Salud"
+    "Start fast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar ayuno"
           }
         }
       }
     },
-    "Time": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hora"
+    "Steady (0.5 kg/wk)" : {
+
+    },
+    "Step %lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Step %1$lld of %2$lld"
           }
         }
       }
     },
-    "Today's Meals": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Comidas de hoy"
+    "Streak" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Racha"
           }
         }
       }
     },
-    "Undo": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deshacer"
+    "Sync with Apple Health" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronizar con Apple Salud"
           }
         }
       }
+    },
+    "Target" : {
+
+    },
+    "Target weight" : {
+
     },
-    "Units": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unidades"
+    "Target: %lld kcal · P %lld g · C %lld g · F %lld g" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Target: %1$lld kcal · P %2$lld g · C %3$lld g · F %4$lld g"
           }
         }
       }
     },
-    "Update Meal": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actualizar comida"
+    "Tells you how many calories remain in today's goal." : {
+
+    },
+    "This is a recipe" : {
+
+    },
+    "Time" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora"
           }
         }
       }
     },
-    "Water": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agua"
+    "Today's Meals" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comidas de hoy"
           }
         }
       }
+    },
+    "Trend" : {
+
     },
-    "Water today": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agua de hoy"
+    "Trend weight: %@" : {
+
+    },
+    "Type a food name, or enter one manually with the + button." : {
+
+    },
+    "Undo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deshacer"
           }
         }
       }
+    },
+    "Unit" : {
+
     },
-    "Week": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Semana"
+    "Units" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unidades"
           }
         }
       }
     },
-    "Weigh-ins": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pesajes"
+    "Update Meal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar comida"
           }
         }
       }
     },
-    "Weight": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Peso"
+    "Version" : {
+
+    },
+    "Water" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agua"
           }
         }
       }
     },
-    "Weight & water": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Peso y agua"
+    "Water today" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agua de hoy"
           }
         }
       }
     },
-    "Welcome to NutriVision": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bienvenido a NutriVision"
+    "WE THINK IT'S" : {
+
+    },
+    "Week" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Semana"
           }
         }
       }
     },
-    "Your Foods": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus alimentos"
+    "Weigh-ins" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesajes"
           }
         }
       }
     },
-    "Your daily targets": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus metas diarias"
+    "Weight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peso"
           }
         }
       }
     },
-    "Your goal": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu meta"
+    "Weight & water" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peso y agua"
           }
         }
       }
+    },
+    "Weight over time" : {
+
     },
-    "best streak": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mejor racha"
+    "Welcome to NutriVision" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenido a NutriVision"
           }
         }
       }
     },
-    "consistency": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "constancia"
+    "What did you eat?" : {
+
+    },
+    "What should we call you?" : {
+
+    },
+    "You have %lld calories left today. You've had %lld of %lld." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You have %1$lld calories left today. You've had %2$lld of %3$lld."
           }
         }
       }
     },
-    "day streak": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "días seguidos"
+    "Your daily targets" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus metas diarias"
           }
         }
       }
     },
-    "iCloud sync": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sincronización con iCloud"
+    "Your Foods" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus alimentos"
           }
         }
       }
     },
-    "kcal total": {
-      "extractionState": "manual",
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "kcal en total"
+    "Your goal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu meta"
           }
         }
       }
+    },
+    "Your trend isn't heading toward your goal yet." : {
+
     }
-  }
+  },
+  "version" : "1.1"
 }

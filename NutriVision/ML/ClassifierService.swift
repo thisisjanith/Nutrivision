@@ -29,14 +29,15 @@ nonisolated struct SendablePixelBuffer: @unchecked Sendable {
 
 actor ClassifierService {
     /// How many ranked guesses to surface. The top result drives the UI; the
-    /// rest back the "not quite right?" alternatives list, which matters a lot
-    /// while the model is a general-purpose ImageNet classifier.
+    /// rest back the "not quite right?" alternatives list.
     static let topResultCount = 5
 
     private var visionModel: VNCoreMLModel?
     private var request: VNCoreMLRequest?
 
-    /// `MobileNetV2`'s generated initializer is main-actor isolated (it
+    /// `FoodClassifier` (EfficientNetV2-S fine-tuned on Food-101, converted by
+    /// `Scripts/convert_food_classifier.py`) runs fully on device. Its
+    /// generated initializer is main-actor isolated (it
     /// inherits the target's default actor isolation), so it's loaded here
     /// lazily via a main-actor hop rather than synchronously in `init`.
     private func loadModelIfNeeded() async throws -> VNCoreMLRequest {
@@ -48,7 +49,7 @@ actor ClassifierService {
             // both faster and far cheaper thermally than the GPU for per-frame
             // inference.
             configuration.computeUnits = .all
-            return try MobileNetV2(configuration: configuration).model
+            return try FoodClassifier(configuration: configuration).model
         }
         let visionModel = try VNCoreMLModel(for: coreMLModel)
         self.visionModel = visionModel

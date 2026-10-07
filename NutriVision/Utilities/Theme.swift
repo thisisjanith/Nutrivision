@@ -25,7 +25,10 @@ extension Color {
     static let macroCarbs = Color(hex: "F2A93B")
     static let macroFat = Color(hex: "3B82D9")
     static let brandPrimary = Color(hex: "1FA37A")
-    static let cardBackground = Color(.secondarySystemGroupedBackground)
+    static let brandTeal = Color(hex: "14B8A6")
+    static let cardBackground = Color(hex: "1C1C1E")
+    static let appBackground = Color.black
+    static let fastingPurple = Color(hex: "8B5CF6")
 }
 
 enum Theme {
@@ -41,5 +44,24 @@ enum Theme {
         static let card: CGFloat = 20
         static let sheet: CGFloat = 28
         static let control: CGFloat = 14
+    }
+}
+
+extension LinearGradient {
+    static let brand = LinearGradient(
+        colors: [Color(hex: "2E9E8A"), Color(hex: "14B8A6")],
+        startPoint: .topLeading, endPoint: .bottomTrailing)
+}
+
+/// Black canvas with a soft teal glow at the top, shared by every tab.
+struct AppBackground: View {
+    var body: some View {
+        ZStack(alignment: .top) {
+            Color.appBackground
+            RadialGradient(colors: [Color.brandPrimary.opacity(0.35), .clear],
+                           center: .top, startRadius: 0, endRadius: 380)
+                .frame(height: 420)
+        }
+        .ignoresSafeArea()
     }
 }

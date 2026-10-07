@@ -123,72 +123,90 @@ struct MealHistoryView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    Picker("Range", selection: $range) {
-                        ForEach(RangeOption.allCases) { option in
-                            Text(option.rawValue).tag(option)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .listRowInsets(EdgeInsets())
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color.clear)
+        ScrollView {
+            VStack(alignment: .leading, spacing: Theme.Spacing.md) {
+                Text("History").font(.largeTitle.bold()).padding(.top, Theme.Spacing.lg)
 
-                    donutCard
-                        .listRowInsets(EdgeInsets())
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                        .padding(.top, Theme.Spacing.sm)
+                searchField
+                rangePicker
+                donutCard
+
+                if filteredMeals.isEmpty {
+                    emptyState
                 }
 
                 ForEach(sections, id: \.title) { section in
-                    Section {
-                        ForEach(section.meals) { meal in
-                            MealRow(meal: meal, onEdit: { onEdit(meal) })
-                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                    Button(role: .destructive) {
-                                        delete(meal)
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
-                                }
-                        }
-                    } header: {
+                    VStack(alignment: .leading, spacing: Theme.Spacing.sm) {
                         Text(section.title)
+                            .font(.title3.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                            .padding(.horizontal, Theme.Spacing.md)
+                        ForEach(section.meals) { meal in
+                            HistoryMealCard(meal: meal, onEdit: { onEdit(meal) }, onDelete: { delete(meal) })
+                        }
                     }
                 }
             }
-            .listStyle(.insetGrouped)
-            .navigationTitle("History")
-            .searchable(text: $searchText, prompt: "Search meals")
-            .overlay {
-                if filteredMeals.isEmpty {
-                    if searchText.isEmpty {
-                        ContentUnavailableView(
-                            "No Meals Logged",
-                            systemImage: "clock",
-                            description: Text("Meals you scan and save will show up here.")
-                        )
-                    } else {
-                        ContentUnavailableView.search(text: searchText)
-                    }
+            .padding(.horizontal, Theme.Spacing.md)
+            .padding(.bottom, Theme.Spacing.lg)
+        }
+        .scrollIndicators(.hidden)
+        .overlay(alignment: .bottom) {
+            if lastDeleted != nil {
+                HStack {
+                    Text("Meal deleted")
+                    Spacer()
+                    Button("Undo", action: undoDelete).fontWeight(.semibold)
                 }
+                .padding(Theme.Spacing.md)
+                .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.control))
+                .padding(Theme.Spacing.md)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
             }
-            .overlay(alignment: .bottom) {
-                if lastDeleted != nil {
-                    HStack {
-                        Text("Meal deleted")
-                        Spacer()
-                        Button("Undo", action: undoDelete).fontWeight(.semibold)
-                    }
-                    .padding(Theme.Spacing.md)
-                    .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.control))
-                    .padding(Theme.Spacing.md)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+        }
+    }
+
+    private var searchField: some View {
+        HStack(spacing: Theme.Spacing.sm) {
+            Image(systemName: "magnifyingglass").foregroundStyle(.secondary)
+            TextField("Search meals", text: $searchText)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+            if !searchText.isEmpty {
+                Button { searchText = "" } label: { Image(systemName: "xmark.circle.fill").foregroundStyle(.secondary) }
+                    .accessibilityLabel("Clear search")
+            }
+        }
+        .font(.title3)
+        .padding(.horizontal, Theme.Spacing.md)
+        .padding(.vertical, 14)
+        .background(.white.opacity(0.1), in: Capsule())
+    }
+
+    private var rangePicker: some View {
+        HStack(spacing: 0) {
+            ForEach(RangeOption.allCases) { option in
+                Button { withAnimation(.snappy(duration: 0.2)) { range = option } } label: {
+                    Text(option.rawValue)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(range == option ? Color.white.opacity(0.25) : .clear, in: Capsule())
                 }
+                .buttonStyle(.plain)
             }
+        }
+        .padding(3)
+        .background(.white.opacity(0.08), in: Capsule())
+    }
+
+    @ViewBuilder
+    private var emptyState: some View {
+        if searchText.isEmpty {
+            ContentUnavailableView("No Meals Logged", systemImage: "clock",
+                                   description: Text("Meals you scan and save will show up here."))
+        } else {
+            ContentUnavailableView.search(text: searchText)
         }
     }
 
@@ -196,32 +214,31 @@ struct MealHistoryView: View {
         HStack(spacing: Theme.Spacing.lg) {
             Chart {
                 if totals.protein + totals.carbs + totals.fat <= 0 {
-                    SectorMark(angle: .value("None", 1), innerRadius: .ratio(0.65), angularInset: 2)
+                    SectorMark(angle: .value("None", 1), innerRadius: .ratio(0.7), angularInset: 2)
                         .foregroundStyle(Color.secondary.opacity(0.2))
                 } else {
                     ForEach(slices) { slice in
-                        SectorMark(angle: .value(slice.label, slice.value), innerRadius: .ratio(0.65), angularInset: 2)
+                        SectorMark(angle: .value(slice.label, slice.value), innerRadius: .ratio(0.7), angularInset: 3)
                             .foregroundStyle(slice.color)
-                            .cornerRadius(4)
+                            .cornerRadius(6)
                     }
                 }
             }
             .chartLegend(.hidden)
-            .frame(width: 120, height: 120)
+            .frame(width: 112, height: 112)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Macro split for the \(range.rawValue.lowercased())")
             .accessibilityValue("Protein \(macroPercentages.protein) percent, carbs \(macroPercentages.carbs) percent, fat \(macroPercentages.fat) percent")
             .overlay {
                 VStack(spacing: 2) {
                     Text(range.rawValue)
-                        .font(.caption2)
+                        .font(.caption)
                         .foregroundStyle(.secondary)
                     Text("\(Int(totals.calories.rounded()))")
-                        .font(.title3)
-                        .fontWeight(.bold)
+                        .font(.title2.bold())
                         .monospacedDigit()
                     Text("kcal")
-                        .font(.caption2)
+                        .font(.caption)
                         .foregroundStyle(.secondary)
                 }
             }
@@ -243,10 +260,10 @@ struct MealHistoryView: View {
                 .fill(color)
                 .frame(width: 8, height: 8)
             Text(label)
-                .font(.footnote)
+                .font(.body)
                 .foregroundStyle(.secondary)
             Text("\(percent)%")
-                .font(.footnote)
+                .font(.body)
                 .fontWeight(.semibold)
         }
     }
@@ -271,6 +288,72 @@ struct MealHistoryView: View {
         modelContext.insert(entry)
         Tracker.shared.mealSaved(entry, context: modelContext)
         withAnimation { lastDeleted = nil }
+    }
+}
+
+/// One logged meal: thumbnail, name, macro dots with time, and calories.
+private struct HistoryMealCard: View {
+    let meal: MealEntry
+    var onEdit: () -> Void
+    var onDelete: () -> Void
+
+    @Environment(\.modelContext) private var modelContext
+
+    var body: some View {
+        HStack(spacing: Theme.Spacing.md) {
+            thumbnail
+            VStack(alignment: .leading, spacing: 6) {
+                Text(meal.name).font(.title3.weight(.semibold)).lineLimit(1)
+                HStack(spacing: 6) {
+                    dot(.macroProtein, meal.proteinGrams)
+                    dot(.macroCarbs, meal.carbsGrams)
+                    dot(.macroFat, meal.fatGrams)
+                    Text("· \(meal.timestamp.formatted(date: .omitted, time: .shortened))")
+                        .foregroundStyle(.secondary)
+                }
+                .font(.subheadline)
+            }
+            Spacer(minLength: 0)
+            VStack(alignment: .trailing, spacing: 0) {
+                Text("\(Int(meal.calories.rounded()))").font(.title2.bold()).monospacedDigit()
+                Text("kcal").font(.subheadline).foregroundStyle(.secondary)
+            }
+        }
+        .cardStyle(padding: Theme.Spacing.md)
+        .contentShape(Rectangle())
+        .onTapGesture(perform: onEdit)
+        .contextMenu {
+            Button("Edit", systemImage: "pencil", action: onEdit)
+            Button("Delete", systemImage: "trash", role: .destructive, action: onDelete)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityHint("Double tap to edit")
+        .accessibilityAction(named: "Delete", onDelete)
+    }
+
+    private func dot(_ color: Color, _ grams: Double) -> some View {
+        HStack(spacing: 4) {
+            Circle().fill(color).frame(width: 8, height: 8)
+            Text("\(Int(grams.rounded()))g").foregroundStyle(.secondary)
+        }
+    }
+
+    @ViewBuilder
+    private var thumbnail: some View {
+        if let data = meal.photoData, let image = UIImage(data: data) {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 64, height: 64)
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .accessibilityHidden(true)
+        } else {
+            Text(FoodEmoji.emoji(for: meal.name))
+                .font(.system(size: 30))
+                .frame(width: 64, height: 64)
+                .background(Color.brandPrimary.opacity(0.15), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .accessibilityHidden(true)
+        }
     }
 }
 

@@ -97,6 +97,8 @@ struct CalorieWidgetView: View {
             Text("\(Int(entry.snapshot.caloriesRemaining.rounded())) kcal left")
         case .systemMedium:
             medium
+        case .systemLarge:
+            large
         default:
             small
         }
@@ -110,6 +112,28 @@ struct CalorieWidgetView: View {
             }
             .buttonStyle(.borderedProminent)
             .tint(brand)
+        }
+    }
+
+    private var large: some View {
+        VStack(spacing: 14) {
+            CalorieRing(snapshot: entry.snapshot, lineWidth: 14).frame(width: 130, height: 130)
+            VStack(spacing: 10) {
+                MacroBar(label: "Protein", value: entry.snapshot.protein, goal: entry.snapshot.proteinGoal, color: Color(red: 0.91, green: 0.33, blue: 0.44))
+                MacroBar(label: "Carbs", value: entry.snapshot.carbs, goal: entry.snapshot.carbsGoal, color: Color(red: 0.95, green: 0.66, blue: 0.23))
+                MacroBar(label: "Fat", value: entry.snapshot.fat, goal: entry.snapshot.fatGoal, color: Color(red: 0.23, green: 0.51, blue: 0.85))
+            }
+            HStack {
+                Button(intent: AddWaterIntent(milliliters: 250)) {
+                    Label("+250 ml", systemImage: "drop.fill").font(.caption.weight(.semibold)).frame(maxWidth: .infinity)
+                }
+                .tint(.blue)
+                Button(intent: OpenScannerIntent()) {
+                    Label("Scan", systemImage: "camera.fill").font(.caption.weight(.semibold)).frame(maxWidth: .infinity)
+                }
+                .tint(brand)
+            }
+            .buttonStyle(.borderedProminent)
         }
     }
 
@@ -146,6 +170,6 @@ struct CalorieWidget: Widget {
         }
         .configurationDisplayName("Today")
         .description("Calories left and macro progress, with quick scan and water buttons.")
-        .supportedFamilies([.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular, .accessoryInline])
     }
 }

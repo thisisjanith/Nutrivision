@@ -10,6 +10,8 @@ import SwiftUI
 struct NutriVisionWidgetBundle: WidgetBundle {
     var body: some Widget {
         CalorieWidget()
+        WaterWidget()
+        FastingWidget()
         FastingLiveActivity()
     }
 }

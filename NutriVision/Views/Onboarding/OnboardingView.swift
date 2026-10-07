@@ -54,7 +54,7 @@ struct OnboardingView: View {
             }
             .padding(Theme.Spacing.lg)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(Color.appBackground.ignoresSafeArea())
         .interactiveDismissDisabled()
     }
 

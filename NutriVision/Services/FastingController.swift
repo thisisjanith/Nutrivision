@@ -6,6 +6,7 @@
 import Foundation
 import ActivityKit
 import Observation
+import WidgetKit
 
 /// Starts/stops the fasting timer and mirrors it into a Live Activity so the
 /// countdown shows on the Lock Screen and Dynamic Island.
@@ -31,6 +32,7 @@ final class FastingController {
         let now = Date()
         startDate = now
         FastingStore.start = now
+        WidgetCenter.shared.reloadTimelines(ofKind: "FastingWidget")
         guard ActivityAuthorizationInfo().areActivitiesEnabled, let end = endDate else { return }
         let attributes = FastingActivityAttributes(goalHours: goalHours)
         let state = FastingActivityAttributes.ContentState(start: now, end: end)
@@ -40,6 +42,7 @@ final class FastingController {
     func stop() {
         startDate = nil
         FastingStore.start = nil
+        WidgetCenter.shared.reloadTimelines(ofKind: "FastingWidget")
         Task {
             for activity in Activity<FastingActivityAttributes>.activities {
                 await activity.end(nil, dismissalPolicy: .immediate)
